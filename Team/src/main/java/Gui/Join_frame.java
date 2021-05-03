@@ -16,6 +16,7 @@ public class Join_frame extends javax.swing.JFrame {
      */
     public Join_frame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
