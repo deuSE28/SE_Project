@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import javax.swing.JOptionPane;
 /**
  *
  * @author Administrator
@@ -28,6 +29,7 @@ public class Join_frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        joincompleteOptionPane = new javax.swing.JOptionPane();
         titleLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         pwLabel = new javax.swing.JLabel();
@@ -274,6 +276,8 @@ public class Join_frame extends javax.swing.JFrame {
 
     private void joinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joinButtonActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다");
+        dispose();
     }//GEN-LAST:event_joinButtonActionPerformed
 
     /**
@@ -321,6 +325,7 @@ public class Join_frame extends javax.swing.JFrame {
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField idTextField;
     private javax.swing.JButton joinButton;
+    private javax.swing.JOptionPane joincompleteOptionPane;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel phoneLabel;
