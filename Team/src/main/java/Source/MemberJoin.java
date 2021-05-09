@@ -12,31 +12,35 @@ package Source;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class MemberJoin {
 
-    /**
-     * @param args the command line arguments
-     */
-    static Scanner scan = new Scanner(System.in);
-    public static void main(String[] args) {
+    public String join(String id, String pw, String name, String email, String phone, String birth, String residence) {
         // TODO code application logic here
         File file = new File("..\\MemberDB.txt");
         try {
             FileWriter filewriter = new FileWriter(file, true);
             if (file.isFile() && file.canWrite()) {
-                System.out.println("아이디 입력 :");
-                filewriter.append(scan.nextLine());
+                filewriter.append(id);
                 filewriter.append("\t");
-                System.out.println("비밀번호 입력 :");
-                filewriter.append(scan.nextLine());
+                filewriter.append(pw);
+                filewriter.append("\t");
+                filewriter.append(name);
+                filewriter.append("\t");
+                filewriter.append(email);
+                filewriter.append("\t");
+                filewriter.append(phone);
+                filewriter.append("\t");
+                filewriter.append(birth);
+                filewriter.append("\t");
+                filewriter.append(residence);
                 filewriter.append("\r");
             }
             filewriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "";
     }
     
 }

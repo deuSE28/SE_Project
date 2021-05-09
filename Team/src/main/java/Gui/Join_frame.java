@@ -5,6 +5,7 @@
  */
 package Gui;
 
+import Source.MemberJoin;
 import javax.swing.JOptionPane;
 /**
  *
@@ -276,8 +277,23 @@ public class Join_frame extends javax.swing.JFrame {
 
     private void joinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joinButtonActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다");
-        dispose();
+        String id = idTextField.getText();
+        String pw = pwPasswordField.getText();
+        String name = nameTextField.getText();
+        String email = emailTextField.getText();
+        String phone = phoneTextField.getText();
+        String birth = birthTextField.getText();
+        String residence = residenceComboBox.getSelectedItem().toString();
+        if (id.equals("") || pw.equals("") || name.equals("") || email.equals("") || phone.equals("") || birth.equals("") || residence.equals("")) {
+            JOptionPane.showMessageDialog(null, "입력되지 않은 항목이 있습니다.");
+        } else if (!pw.equals(pwcheckPasswordField.getText())) {
+            JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+        } else {
+            MemberJoin Join = new MemberJoin();
+            Join.join(id, pw, name, email, phone, birth, residence);
+            JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
+            dispose();
+        }
     }//GEN-LAST:event_joinButtonActionPerformed
 
     /**

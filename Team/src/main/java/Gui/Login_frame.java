@@ -5,6 +5,8 @@
  */
 package Gui;
 
+import Source.Login;
+import javax.swing.JOptionPane;
 /**
  *
  * @author qjqmf
@@ -141,6 +143,16 @@ public class Login_frame extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
+        String getID = idTextField.getText();
+        String getPW = PasswordField.getText();
+        if (getID.equals("")) {
+            JOptionPane.showMessageDialog(null, "아이디를 입력하시오");
+        } else if (getPW.equals("")){
+            JOptionPane.showMessageDialog(null, "비밀번호를 입력하시오");
+        } else {
+            Login pass = new Login();
+            JOptionPane.showMessageDialog(null, pass.login(getID, getPW));
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed

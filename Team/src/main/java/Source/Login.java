@@ -14,21 +14,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Login {
-
-    /**
-     * @param args the command line arguments
-     */
-    static Scanner scan = new Scanner(System.in);
-    public static void main(String[] args) {
-        // TODO code application logic here
+    
+    public String login(String id, String pw) {
         int pass = 0;
-        System.out.println("아이디 입력:");
-        String id = scan.nextLine();
-        System.out.println("비밀번호 입력:");
-        String pw = scan.nextLine();
         File file = new File("..\\MemberDB.txt");
         try {
             FileReader filereader = new FileReader(file);
@@ -40,12 +30,12 @@ public class Login {
                     int passId = line.indexOf(id);
                     int passPw = line.indexOf(pw);
                     if (passId != -1 && passPw != -1) {
-                        System.out.println("로그인 성공");
                         pass = -1;
+                        return "로그인 성공";
                     }    
                 }
                 if (pass == 0) {
-                        System.out.println("로그인 실패");
+                        return "로그인 실패";
                     }
                 bufReader.close();
             } catch (IOException e) {
@@ -54,5 +44,6 @@ public class Login {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-    }    
+        return "";
+    }
 }
