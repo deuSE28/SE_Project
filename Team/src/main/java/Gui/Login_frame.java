@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package deu.cse.team;
+package Gui;
 
+import Source.Login;
+import javax.swing.JOptionPane;
 /**
  *
  * @author qjqmf
@@ -16,8 +18,9 @@ public class Login_frame extends javax.swing.JFrame {
      */
     public Login_frame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,8 +30,8 @@ public class Login_frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        signUpButton = new javax.swing.JButton();
-        signInButton = new javax.swing.JButton();
+        joinButton = new javax.swing.JButton();
+        loginButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         idLable = new javax.swing.JLabel();
         pwLable = new javax.swing.JLabel();
@@ -37,17 +40,20 @@ public class Login_frame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        signUpButton.setText("회원가입");
-        signUpButton.addActionListener(new java.awt.event.ActionListener() {
+        joinButton.setText("회원가입");
+        joinButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signUpButtonActionPerformed(evt);
+                joinButtonActionPerformed(evt);
             }
         });
 
-        signInButton.setText("로그인");
-        signInButton.addActionListener(new java.awt.event.ActionListener() {
+        loginButton.setText("로그인");
+        loginButton.setMaximumSize(new java.awt.Dimension(81, 23));
+        loginButton.setMinimumSize(new java.awt.Dimension(81, 23));
+        loginButton.setPreferredSize(new java.awt.Dimension(81, 23));
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signInButtonActionPerformed(evt);
+                loginButtonActionPerformed(evt);
             }
         });
 
@@ -55,11 +61,11 @@ public class Login_frame extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("동의마켓 로그인");
 
-        idLable.setFont(new java.awt.Font("굴림", 1, 14)); // NOI18N
+        idLable.setFont(new java.awt.Font("굴림", 0, 14)); // NOI18N
         idLable.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         idLable.setText("아이디 :");
 
-        pwLable.setFont(new java.awt.Font("굴림", 1, 14)); // NOI18N
+        pwLable.setFont(new java.awt.Font("굴림", 0, 14)); // NOI18N
         pwLable.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         pwLable.setText("비밀번호 :");
 
@@ -93,13 +99,13 @@ public class Login_frame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 92, Short.MAX_VALUE)
-                .addComponent(signUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                .addGap(0, 98, Short.MAX_VALUE)
+                .addComponent(joinButton)
+                .addGap(51, 51, 51)
+                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,16 +114,16 @@ public class Login_frame extends javax.swing.JFrame {
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idLable, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pwLable, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(signUpButton)
-                    .addComponent(signInButton))
+                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(joinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50))
         );
 
@@ -128,13 +134,26 @@ public class Login_frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idTextFieldActionPerformed
 
-    private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
+    private void joinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joinButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_signUpButtonActionPerformed
+        Join_frame joinframe = new Join_frame();
+        joinframe.setVisible(true); // Open Join_frame
+        joinframe.setDefaultCloseOperation(Join_frame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_joinButtonActionPerformed
 
-    private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_signInButtonActionPerformed
+        String getID = idTextField.getText();
+        String getPW = PasswordField.getText();
+        if (getID.equals("")) {
+            JOptionPane.showMessageDialog(null, "아이디를 입력하시오");
+        } else if (getPW.equals("")){
+            JOptionPane.showMessageDialog(null, "비밀번호를 입력하시오");
+        } else {
+            Login pass = new Login();
+            JOptionPane.showMessageDialog(null, pass.login(getID, getPW));
+        }
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
         // TODO add your handling code here:
@@ -166,7 +185,7 @@ public class Login_frame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -179,9 +198,9 @@ public class Login_frame extends javax.swing.JFrame {
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel idLable;
     private javax.swing.JTextField idTextField;
+    private javax.swing.JButton joinButton;
+    private javax.swing.JButton loginButton;
     private javax.swing.JLabel pwLable;
-    private javax.swing.JButton signInButton;
-    private javax.swing.JButton signUpButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
