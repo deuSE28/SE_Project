@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Gui;
+package TP.join;
 
-import Source.MemberJoin;
+import TP.source.Login_Source;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
  * @author Administrator
  */
-public class Join_frame extends javax.swing.JFrame {
+public class Join extends javax.swing.JFrame {
 
     /**
      * Creates new form SignUp_frame
      */
-    public Join_frame() {
+    public Join() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -284,15 +287,22 @@ public class Join_frame extends javax.swing.JFrame {
         String phone = phoneTextField.getText();
         String birth = birthTextField.getText();
         String residence = residenceComboBox.getSelectedItem().toString();
+        
+        Login_Source lg = new Login_Source();
         if (id.equals("") || pw.equals("") || name.equals("") || email.equals("") || phone.equals("") || birth.equals("") || residence.equals("")) {
             JOptionPane.showMessageDialog(null, "입력되지 않은 항목이 있습니다.");
         } else if (!pw.equals(pwcheckPasswordField.getText())) {
             JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+        } else if(!email.contains("@")) {
+            JOptionPane.showMessageDialog(null, "이메일 형식이 올바르지 않습니다.");
         } else {
-            MemberJoin Join = new MemberJoin();
-            Join.join(id, pw, name, email, phone, birth, residence);
             JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
-            dispose();
+            try {
+                lg.SWrite(id+" "+pw+" "+name+" "+email+" "+phone+" "+birth+" "+residence);
+                dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(Join.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_joinButtonActionPerformed
 
@@ -313,21 +323,23 @@ public class Join_frame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Join_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Join.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Join_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Join.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Join_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Join.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Join_frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Join.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Join_frame().setVisible(true);
+                new Join().setVisible(true);
             }
         });
     }

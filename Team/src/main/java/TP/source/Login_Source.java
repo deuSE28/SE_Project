@@ -56,7 +56,7 @@ public class Login_Source implements FileInterface {
 
     @Override
     public void FWrite(String a) throws IOException {
-        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\loginlog.txt",false));
+        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\loginlog.txt",true));
         PrintWriter pw = new PrintWriter(log,true);
         pw.write(a+"\n");
         pw.flush();

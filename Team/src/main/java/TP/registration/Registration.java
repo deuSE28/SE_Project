@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package deu.cse.team;
+package TP.registration;
 
 import javax.swing.*;
 import java.io.*;
@@ -12,14 +12,15 @@ import java.io.*;
  *
  * @author qjqmf
  */
-public class RegistrationProduct_Frame extends javax.swing.JFrame {
+public class Registration extends javax.swing.JFrame {
 
     /**
      * Creates new form RegistrationProduct_Frame
      */
-    public RegistrationProduct_Frame() {
+    public Registration() {
         initComponents();
         setTitle("Product Registration Page");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -32,6 +33,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
+        buttonGroup = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         name_product = new javax.swing.JTextField();
@@ -121,6 +123,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel9.setText("제품 상태 :");
 
+        buttonGroup.add(unopened_radio);
         unopened_radio.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         unopened_radio.setText("미개봉");
         unopened_radio.addActionListener(new java.awt.event.ActionListener() {
@@ -129,9 +132,11 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup.add(almostnew_radio);
         almostnew_radio.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         almostnew_radio.setText("거의새것");
 
+        buttonGroup.add(used_radio);
         used_radio.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         used_radio.setText("중고");
 
@@ -177,11 +182,10 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(name_product, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(quantity_product, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(price_product, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(kategorie_product, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(name_product)
+                                .addComponent(quantity_product)
+                                .addComponent(price_product)
+                                .addComponent(kategorie_product, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(explanation_product, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(trandingarea_product, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -262,28 +266,30 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         String price = price_product.getText();
         String quantity = quantity_product.getText();
         String explanation = explanation_product.getText();
-        String trandingarea = trandingarea_product.getSelectedItem().toString();
+        unopened_radio.setActionCommand("미개봉");
+        almostnew_radio.setActionCommand("거의새것");
+        used_radio.setActionCommand("중고");
+        String trandingarea = buttonGroup.getSelection().getActionCommand();
         // 라디오 버튼 3개 값 가져와야함
         
-        File f1 = new File("RegistrationProduct.txt");
+        File f1 = new File("C:\\DB\\registration.txt");
         
-        try {
-            FileWriter writer = new FileWriter(f1, true);
-            writer.write(name + '/');
-            writer.write(kategorie + '/');
-            writer.write(price + '/');
-            writer.write(quantity + '/');
-            writer.write(explanation + '/');
+       
+        try (FileWriter writer = new FileWriter(f1, true)) {
+            writer.write(name + "/");
+            writer.write(kategorie + "/");
+            writer.write(price + "/");
+            writer.write(quantity + "/");
+            writer.write(explanation + "/");
             writer.write(trandingarea + '\n');
             // 라디오 버튼 선택된거에 따라 파일에 저장해야함
             writer.flush();
-            writer.close();
         } catch (IOException e) {
-            System.out.println("오류발생");
+            e.printStackTrace();
         }
         // 정보 입력하지 않았을 시 등록 불가 기능 추가해야함
         JOptionPane.showMessageDialog(null, "등록이 완료 되었습니다."); // 메시지 창
-        
+        dispose();
     }//GEN-LAST:event_appointment_buttonActionPerformed
 
     private void price_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_price_productActionPerformed
@@ -324,7 +330,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
 
         String selectedFile = fileChooser.getSelectedFile().toString(); // 파일 경로
         
-        File f2 = new File("RegistrationProduct_Image.txt");
+        File f2 = new File("C:\\DB\\registration.txt");
         
         try {
             FileWriter writer = new FileWriter(f2, true);
@@ -332,7 +338,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            System.out.println("오류발생");
+            e.printStackTrace();
         }
         
     }//GEN-LAST:event_filechooser_buttonActionPerformed
@@ -354,20 +360,21 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistrationProduct_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistrationProduct_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistrationProduct_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistrationProduct_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Registration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistrationProduct_Frame().setVisible(true);
+                new Registration().setVisible(true);
             }
         });
     }
@@ -375,6 +382,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton almostnew_radio;
     private javax.swing.JButton appointment_button;
+    private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JTextField explanation_product;
     private javax.swing.JButton filechooser_button;
     private javax.swing.JFileChooser jFileChooser1;

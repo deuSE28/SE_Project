@@ -7,11 +7,14 @@ package TP.login;
 
 import TP.source.Login_Source;
 import TP.source.LogindataInfo;
+import TP.join.Join;
 import TP.mainmenu.MainMenu;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +30,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -84,17 +88,17 @@ public class Login extends javax.swing.JFrame {
                 .addGap(119, 119, 119)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(ID_Field))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(PW_Field))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(SignUp_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PW_Field, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(ID_Field))))
                 .addGap(116, 116, 116))
         );
         layout.setVerticalGroup(
@@ -124,13 +128,18 @@ public class Login extends javax.swing.JFrame {
 
     private void SignUp_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUp_ButtonActionPerformed
         // TODO add your handling code here:
+        Join joinframe = new Join();
+        joinframe.setVisible(true);
+        joinframe.setDefaultCloseOperation(Join.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_SignUp_ButtonActionPerformed
 
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String time = format1.format(new Date());
         Login_Source lg = new Login_Source();
         lg.FRead();
         lg.Split();
-
+        
         try{
             logininfo = lg.returnLogininfo();
         } catch (IOException ex){
@@ -150,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                 if (i == 0) {
                     JOptionPane.showMessageDialog(null, "관리자 로그인 성공");
                     try {
-                        lg.FWrite(id);
+                        lg.FWrite(id+"\t"+time);
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -162,7 +171,7 @@ public class Login extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "로그인 성공");
                     try {
-                        lg.FWrite(id);
+                        lg.FWrite(id+"\t"+time);
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
