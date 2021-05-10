@@ -265,9 +265,8 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         String trandingarea = trandingarea_product.getSelectedItem().toString();
         // 라디오 버튼 3개 값 가져와야함
         
-        File f1 = new File("RegistrationProduct.txt");
-        
         try {
+            File f1 = new File("C:\\DB\\RegistrationProduct.txt");
             FileWriter writer = new FileWriter(f1, true);
             writer.write(name + '/');
             writer.write(kategorie + '/');
@@ -276,11 +275,13 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             writer.write(explanation + '/');
             writer.write(trandingarea + '\n');
             // 라디오 버튼 선택된거에 따라 파일에 저장해야함
+            
             writer.flush();
             writer.close();
         } catch (IOException e) {
             System.out.println("오류발생");
         }
+        
         // 정보 입력하지 않았을 시 등록 불가 기능 추가해야함
         JOptionPane.showMessageDialog(null, "등록이 완료 되었습니다."); // 메시지 창
         
@@ -324,9 +325,8 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
 
         String selectedFile = fileChooser.getSelectedFile().toString(); // 파일 경로
         
-        File f2 = new File("RegistrationProduct_Image.txt");
-        
         try {
+            File f2 = new File("C:\\DB\\RegistrationProduct_Image.txt");
             FileWriter writer = new FileWriter(f2, true);
             writer.write(selectedFile + '\n');
             writer.flush();
@@ -334,7 +334,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("오류발생");
         }
-        
     }//GEN-LAST:event_filechooser_buttonActionPerformed
 
     /**

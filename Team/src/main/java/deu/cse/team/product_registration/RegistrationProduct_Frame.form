@@ -52,12 +52,10 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="name_product" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="quantity_product" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="price_product" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="kategorie_product" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="name_product" alignment="0" max="32767" attributes="0"/>
+                              <Component id="quantity_product" alignment="0" max="32767" attributes="0"/>
+                              <Component id="price_product" alignment="0" max="32767" attributes="0"/>
+                              <Component id="kategorie_product" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
                               <Component id="explanation_product" min="-2" pref="180" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="trandingarea_product" max="32767" attributes="0"/>
