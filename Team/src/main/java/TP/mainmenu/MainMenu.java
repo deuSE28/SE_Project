@@ -5,6 +5,9 @@
  */
 package TP.mainmenu;
 
+import deu.cse.team.Delivery.Delivery_Frame;
+import deu.cse.team.RegistrationProduct_Frame;
+
 /**
  *
  * @author BON
@@ -27,17 +30,30 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        RegistrationProduct_Button = new javax.swing.JButton();
+        ProductSearch_Button = new javax.swing.JButton();
+        Delivery_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("제품등록");
-
-        jButton2.setText("제품검색");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        RegistrationProduct_Button.setText("제품등록");
+        RegistrationProduct_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                RegistrationProduct_ButtonActionPerformed(evt);
+            }
+        });
+
+        ProductSearch_Button.setText("제품검색");
+        ProductSearch_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProductSearch_ButtonActionPerformed(evt);
+            }
+        });
+
+        Delivery_Button.setText("배송조회");
+        Delivery_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Delivery_ButtonActionPerformed(evt);
             }
         });
 
@@ -46,28 +62,43 @@ public class MainMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
+                .addGap(162, 162, 162)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(213, Short.MAX_VALUE))
+                    .addComponent(Delivery_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ProductSearch_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RegistrationProduct_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addComponent(jButton1)
+                .addComponent(RegistrationProduct_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ProductSearch_Button)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addComponent(Delivery_Button)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ProductSearch_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductSearch_ButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ProductSearch_ButtonActionPerformed
+
+    private void RegistrationProduct_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrationProduct_ButtonActionPerformed
+        RegistrationProduct_Frame RF = new RegistrationProduct_Frame();
+        RF.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_RegistrationProduct_ButtonActionPerformed
+
+    private void Delivery_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delivery_ButtonActionPerformed
+        Delivery_Frame DF = new Delivery_Frame();
+        DF.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_Delivery_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,7 +137,8 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Delivery_Button;
+    private javax.swing.JButton ProductSearch_Button;
+    private javax.swing.JButton RegistrationProduct_Button;
     // End of variables declaration//GEN-END:variables
 }
