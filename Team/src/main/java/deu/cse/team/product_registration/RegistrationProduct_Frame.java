@@ -5,6 +5,7 @@
  */
 package deu.cse.team;
 
+import deu.cse.team.mainmenu.MainMenu;
 import javax.swing.*;
 import java.io.*;
 
@@ -52,6 +53,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         used_radio = new javax.swing.JRadioButton();
         appointment_button = new javax.swing.JButton();
         filechooser_button = new javax.swing.JButton();
+        Back_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,6 +152,13 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             }
         });
 
+        Back_Button.setText("이전");
+        Back_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Back_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,11 +186,10 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(name_product, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(quantity_product, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(price_product, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(kategorie_product, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(name_product)
+                                .addComponent(quantity_product)
+                                .addComponent(price_product)
+                                .addComponent(kategorie_product, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(explanation_product, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(trandingarea_product, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -195,7 +203,9 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(173, 173, 173)
                 .addComponent(appointment_button)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Back_Button)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +254,9 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)))
                 .addGap(18, 18, 18)
-                .addComponent(appointment_button)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(appointment_button)
+                    .addComponent(Back_Button))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -336,6 +348,12 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_filechooser_buttonActionPerformed
 
+    private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed
+        MainMenu mm = new MainMenu();
+        mm.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_Back_ButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,6 +390,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Back_Button;
     private javax.swing.JRadioButton almostnew_radio;
     private javax.swing.JButton appointment_button;
     private javax.swing.JTextField explanation_product;
