@@ -6,7 +6,7 @@
 package deu.cse.team.mainmenu;
 
 import deu.cse.team.Delivery.Delivery_Frame;
-import deu.cse.team.RegistrationProduct_Frame;
+import deu.cse.team.product_registration.RegistrationProduct_Frame;
 
 /**
  *
@@ -19,6 +19,7 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

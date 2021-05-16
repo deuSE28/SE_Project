@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package deu.cse.team;
+package deu.cse.team.product_registration;
 
 import deu.cse.team.mainmenu.MainMenu;
 import javax.swing.*;
@@ -20,6 +20,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
      */
     public RegistrationProduct_Frame() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Product Registration Page");
     }
 

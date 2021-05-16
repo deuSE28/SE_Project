@@ -17,6 +17,7 @@ public class Delivery_Frame extends javax.swing.JFrame {
      */
     public Delivery_Frame() {
         initComponents();
+        setLocationRelativeTo(null);
         String [] delivery = {"출고 준비중", "출고완료", "배달중", "배달완료"};
         product_delivery pd_d = new product_delivery();
         pd_d.deliveryproduct();
