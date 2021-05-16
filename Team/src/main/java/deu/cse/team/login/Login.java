@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TP.login;
+package deu.cse.team.login;
 
-import TP.source.Login_Source;
-import TP.source.LogindataInfo;
-import TP.join.Join;
-import TP.mainmenu.MainMenu;
+import deu.cse.team.source.Login_Source;
+import deu.cse.team.source.LogindataInfo;
+import deu.cse.team.join.Join;
+import deu.cse.team.mainmenu.MainMenu;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;

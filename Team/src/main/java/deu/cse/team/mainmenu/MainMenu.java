@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TP.mainmenu;
+package deu.cse.team.mainmenu;
 
-import TP.registration.Registration;
+import deu.cse.team.product_registration.Registration;
 /**
  *
  * @author BON
