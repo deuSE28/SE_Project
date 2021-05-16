@@ -7,13 +7,14 @@ package deu.cse.team.login;
 
 import deu.cse.team.source.Login_Source;
 import deu.cse.team.source.LogindataInfo;
+import deu.cse.team.join.Join;
 import deu.cse.team.mainmenu.MainMenu;
-import deu.cse.team.source.SignUp;
-import deu.cse.team.source.SignUpdataInfo;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +23,6 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
     ArrayList<LogindataInfo> logininfo = new ArrayList<>();
-    ArrayList<SignUpdataInfo> signupinfo = new ArrayList<>();
     Boolean a;
     
     /**
@@ -30,6 +30,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -41,94 +42,12 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SignUp = new javax.swing.JDialog();
-        SName_Field = new javax.swing.JTextField();
-        SID_Field = new javax.swing.JTextField();
-        SPhoneNum_Field = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        SPW_Field = new javax.swing.JPasswordField();
-        jLabel7 = new javax.swing.JLabel();
-        SingUp_Check_Button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         PW_Field = new javax.swing.JPasswordField();
         ID_Field = new javax.swing.JTextField();
         SignUp_Button = new javax.swing.JButton();
         Login_Button = new javax.swing.JButton();
-
-        SignUp.setMinimumSize(new java.awt.Dimension(360, 500));
-        SignUp.setName("SignUp"); // NOI18N
-
-        jLabel3.setText("이름");
-
-        jLabel4.setText("ID");
-
-        jLabel5.setText("PW");
-
-        jLabel6.setText("전화번호");
-
-        jLabel7.setText("회원가입");
-
-        SingUp_Check_Button.setText("확인");
-        SingUp_Check_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SingUp_Check_ButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout SignUpLayout = new javax.swing.GroupLayout(SignUp.getContentPane());
-        SignUp.getContentPane().setLayout(SignUpLayout);
-        SignUpLayout.setHorizontalGroup(
-            SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SignUpLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(SPhoneNum_Field)
-                        .addComponent(SID_Field)
-                        .addComponent(SName_Field)
-                        .addComponent(SPW_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(100, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignUpLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SingUp_Check_Button)
-                .addContainerGap())
-        );
-        SignUpLayout.setVerticalGroup(
-            SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SignUpLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SName_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SID_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(SPW_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(SPhoneNum_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(SingUp_Check_Button)
-                .addContainerGap())
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,17 +88,17 @@ public class Login extends javax.swing.JFrame {
                 .addGap(119, 119, 119)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(ID_Field))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(PW_Field))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(SignUp_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PW_Field, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(ID_Field))))
                 .addGap(116, 116, 116))
         );
         layout.setVerticalGroup(
@@ -208,14 +127,19 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_ID_FieldActionPerformed
 
     private void SignUp_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUp_ButtonActionPerformed
-        SignUp.setVisible(true);
+        // TODO add your handling code here:
+        Join joinframe = new Join();
+        joinframe.setVisible(true);
+        joinframe.setDefaultCloseOperation(Join.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_SignUp_ButtonActionPerformed
 
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String time = format1.format(new Date());
         Login_Source lg = new Login_Source();
         lg.FRead();
         lg.Split();
-
+        
         try{
             logininfo = lg.returnLogininfo();
         } catch (IOException ex){
@@ -235,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                 if (i == 0) {
                     JOptionPane.showMessageDialog(null, "관리자 로그인 성공");
                     try {
-                        lg.FWrite(id);
+                        lg.FWrite(id+"\t"+time);
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -247,7 +171,7 @@ public class Login extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "로그인 성공");
                     try {
-                        lg.FWrite(id);
+                        lg.FWrite(id+"\t"+time);
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -264,51 +188,6 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "로그인 실패");
         }
     }//GEN-LAST:event_Login_ButtonActionPerformed
-
-    private void SingUp_Check_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SingUp_Check_ButtonActionPerformed
-        SignUp create = new SignUp();
-        create.FRead();
-            
-        try {
-            create.Split();
-            signupinfo = create.returnSignUpInfo();
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String sid = SID_Field.getText();
-        String spw = SPW_Field.getText();
-        String sname = SName_Field.getText();
-        String sphonenum = SPhoneNum_Field.getText();
-        String b = sid + " " + spw + " " + sname + " " + sphonenum;
-        
-        
-        int count = 1;
-        for (int j = 0; j < signupinfo.size(); j++) {
-            if (signupinfo.get(j).getId().equals(sid)) {
-                JOptionPane.showMessageDialog(null, "중복아이디입니다.");
-                SID_Field.setText("");
-                count = 0;
-                break;
-            }
-        }
-        try {
-            if (!"".equals(sid) && !"".equals(spw) && !"".equals(sname) && !"".equals(sphonenum)) {
-                if (count == 1) {
-                    create.FWrite(b);
-                    JOptionPane.showMessageDialog(null, "회원 가입 완료");
-                    SID_Field.setText("");
-                    SPW_Field.setText("");
-                    SName_Field.setText("");
-                    SPhoneNum_Field.setText("");
-                    SignUp.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요");
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_SingUp_Check_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,19 +229,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField ID_Field;
     private javax.swing.JButton Login_Button;
     private javax.swing.JPasswordField PW_Field;
-    private javax.swing.JTextField SID_Field;
-    private javax.swing.JTextField SName_Field;
-    private javax.swing.JPasswordField SPW_Field;
-    private javax.swing.JTextField SPhoneNum_Field;
-    private javax.swing.JDialog SignUp;
     private javax.swing.JButton SignUp_Button;
-    private javax.swing.JButton SingUp_Check_Button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

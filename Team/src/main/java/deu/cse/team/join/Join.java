@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ddeu.cse.team.join;
+package deu.cse.team.join;
 
-import ddeu.cse.team.source.Login_Source;
+import deu.cse.team.source.Login_Source;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

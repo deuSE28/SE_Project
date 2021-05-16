@@ -39,7 +39,7 @@ public class Login_Source implements FileInterface {
             e.printStackTrace();
         }
         try {
-            File Stext = new File("C:\\DB\\userList.txt");
+            File Stext = new File("C:\\DB\\userID.txt");
             FileReader textRead = new FileReader(Stext);
             BufferedReader bfReader = new BufferedReader(textRead);
             String line = "";
@@ -56,7 +56,7 @@ public class Login_Source implements FileInterface {
 
     @Override
     public void FWrite(String a) throws IOException {
-        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\loginlog.txt",false));
+        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\loginlog.txt",true));
         PrintWriter pw = new PrintWriter(log,true);
         pw.write(a+"\n");
         pw.flush();
@@ -71,7 +71,7 @@ public class Login_Source implements FileInterface {
     }
     
     public void SWrite(String a) throws IOException{
-        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\userList.txt",true));
+        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\userID.txt",true));
         PrintWriter pw = new PrintWriter(log,true);
         pw.write(a+"\n");
         pw.flush();
