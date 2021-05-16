@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package deu.cse.team.source;
-
-import java.io.IOException;
+package ddeu.cse.team;
 
 /**
  *
- * @author BON
+ * @author qjqmf
  */
-public interface FileInterface {
-    void FRead();
-    void FWrite(String a) throws IOException;
-    void Split();
+public interface RegistrationProduct_Interface {
+    public void createPrice();
+    public void createState();
 }

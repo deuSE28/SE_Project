@@ -3,13 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package deu.cse.team;
+package ddeu.cse.team;
 
 /**
  *
  * @author qjqmf
  */
-public interface RegistrationProduct_Interface {
-    public void createPrice();
-    public void createState();
+public class Kategorie_Game implements RegistrationProduct_Interface {
+    public void createPrice() {
+        
+    }
+   
+    public void createState() {
+        
+    }
 }
