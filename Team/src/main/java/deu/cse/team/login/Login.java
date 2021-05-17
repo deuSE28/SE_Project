@@ -159,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                 if (i == 0) {
                     JOptionPane.showMessageDialog(null, "관리자 로그인 성공");
                     try {
-                        lg.FWrite(id+"\t"+time);
+                        lg.FWrite(id+" "+time);
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -171,7 +171,7 @@ public class Login extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "로그인 성공");
                     try {
-                        lg.FWrite(id+"\t"+time);
+                        lg.FWrite(id+" "+time);
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
