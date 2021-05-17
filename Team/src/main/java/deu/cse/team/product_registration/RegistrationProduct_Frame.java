@@ -22,8 +22,29 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Product Registration Page");
+        cmbList();
     }
-
+    
+    // 콤보박스에 카테고리를 불러옴
+    public void cmbList() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel<>();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("C:\\DB\\category.txt"));
+            int val = Integer.parseInt(br.readLine());
+            for (int i=0; i<val; i++) {
+                String line = br.readLine();
+                model.addElement(line);
+                kategorie_product.setModel(model);
+            }
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("파일이 존재하지않습니다. 경로를 확인해주세요");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,7 +96,12 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel3.setText("카테고리 :");
 
         kategorie_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
-        kategorie_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "수입명품", "패션의류", "패션잡화", "뷰티", "출산/유아동", "모바일/태블릿", "가전제품", "노트북/데스크탑", "카메라/캠코더", "가구/인테리어", "리빙/생활", "게임", "반려동물/취미", "도서/음반/문구", "티켓/쿠폰", "스포츠", "레저/여행", "오토바이", "공구/산업용품" }));
+        kategorie_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
+        kategorie_product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategorie_productActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel4.setText("판매 가격 :");
@@ -355,7 +381,10 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_Back_ButtonActionPerformed
 
-    /**
+    private void kategorie_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorie_productActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kategorie_productActionPerformed
+        /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -380,7 +409,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RegistrationProduct_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -406,7 +434,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JComboBox<String> kategorie_product;
+    public static javax.swing.JComboBox<String> kategorie_product;
     private javax.swing.JTextField name_product;
     private javax.swing.JTextField price_product;
     private javax.swing.JTextField quantity_product;
