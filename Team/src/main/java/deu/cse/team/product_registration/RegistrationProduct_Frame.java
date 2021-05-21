@@ -55,6 +55,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
+        statusButtonGroup = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         name_product = new javax.swing.JTextField();
@@ -150,6 +151,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel9.setText("제품 상태 :");
 
+        statusButtonGroup.add(unopened_radio);
         unopened_radio.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         unopened_radio.setText("미개봉");
         unopened_radio.addActionListener(new java.awt.event.ActionListener() {
@@ -158,11 +160,23 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             }
         });
 
+        statusButtonGroup.add(almostnew_radio);
         almostnew_radio.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         almostnew_radio.setText("거의새것");
+        almostnew_radio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                almostnew_radioActionPerformed(evt);
+            }
+        });
 
+        statusButtonGroup.add(used_radio);
         used_radio.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         used_radio.setText("중고");
+        used_radio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                used_radioActionPerformed(evt);
+            }
+        });
 
         appointment_button.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         appointment_button.setText("등록완료");
@@ -302,7 +316,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         String quantity = quantity_product.getText();
         String explanation = explanation_product.getText();
         String trandingarea = trandingarea_product.getSelectedItem().toString();
-        // 라디오 버튼 3개 값 가져와야함
+        String status = statusButtonGroup.getSelection().getActionCommand();
         
         try {
             File f1 = new File("C:\\DB\\RegistrationProduct.txt");
@@ -312,7 +326,8 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             writer.write(price + '/');
             writer.write(quantity + '/');
             writer.write(explanation + '/');
-            writer.write(trandingarea + '\n');
+            writer.write(trandingarea + '/');
+            writer.write(status + "\n");
             // 라디오 버튼 선택된거에 따라 파일에 저장해야함
             
             writer.flush();
@@ -344,16 +359,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
 
     private void unopened_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unopened_radioActionPerformed
         // TODO add your handling code here:
-        ButtonGroup state_radio = new ButtonGroup(); // 라디오버튼 그룹화
-        
-        state_radio.add(unopened_radio);
-        state_radio.add(almostnew_radio);
-        state_radio.add(used_radio);
-        
-        this.add(unopened_radio);
-        this.add(almostnew_radio);
-        this.add(used_radio);
-        
+        unopened_radio.setActionCommand("미개봉");
     }//GEN-LAST:event_unopened_radioActionPerformed
 
     private void filechooser_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filechooser_buttonActionPerformed
@@ -384,6 +390,16 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private void kategorie_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorie_productActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_kategorie_productActionPerformed
+
+    private void almostnew_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_almostnew_radioActionPerformed
+        // TODO add your handling code here:
+        almostnew_radio.setActionCommand("거의새것");
+    }//GEN-LAST:event_almostnew_radioActionPerformed
+
+    private void used_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_used_radioActionPerformed
+        // TODO add your handling code here:
+        used_radio.setActionCommand("중고");
+    }//GEN-LAST:event_used_radioActionPerformed
         /**
      * @param args the command line arguments
      */
@@ -438,6 +454,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private javax.swing.JTextField name_product;
     private javax.swing.JTextField price_product;
     private javax.swing.JTextField quantity_product;
+    private javax.swing.ButtonGroup statusButtonGroup;
     private javax.swing.JComboBox<String> trandingarea_product;
     private javax.swing.JRadioButton unopened_radio;
     private javax.swing.JRadioButton used_radio;
