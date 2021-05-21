@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author CHANG
  */
-public class Category_Frame extends javax.swing.JFrame {
+public class Category extends javax.swing.JFrame {
 
     /**
      * Creates new form Category_Frame
@@ -25,7 +25,7 @@ public class Category_Frame extends javax.swing.JFrame {
     DefaultListModel<String> listModel;
     Boolean flag;
     
-    public Category_Frame() {
+    public Category() {
         initComponents();
         setLocationRelativeTo(null);
         listModel = new DefaultListModel<>();
@@ -204,20 +204,21 @@ public class Category_Frame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Category_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Category_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Category_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Category_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Category_Frame().setVisible(true);
+                new Category().setVisible(true);
             }
         });
         
