@@ -5,6 +5,7 @@
  */
 package deu.cse.team.Delivery;
 import deu.cse.team.Delivery.product_delivery_test;
+import deu.cse.team.mainmenu.MainMenu;
 /**
  *
  * @author qjqmf
@@ -16,6 +17,7 @@ public class Delivery_Frame extends javax.swing.JFrame {
      */
     public Delivery_Frame() {
         initComponents();
+        setLocationRelativeTo(null);
         String [] delivery = {"출고 준비중", "출고완료", "배달중", "배달완료"};
         product_delivery pd_d = new product_delivery();
         pd_d.deliveryproduct();
@@ -34,6 +36,7 @@ public class Delivery_Frame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         delivery_List = new javax.swing.JList<>();
+        Back_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +44,13 @@ public class Delivery_Frame extends javax.swing.JFrame {
         jLabel1.setText("배송 조회");
 
         jScrollPane1.setViewportView(delivery_List);
+
+        Back_Button.setText("이전");
+        Back_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Back_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,7 +64,10 @@ public class Delivery_Frame extends javax.swing.JFrame {
                         .addGap(90, 90, 90))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))))
+                        .addGap(101, 101, 101))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Back_Button)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,11 +76,19 @@ public class Delivery_Frame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Back_Button)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed
+        MainMenu mm = new MainMenu();
+        mm.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_Back_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,6 +126,7 @@ public class Delivery_Frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Back_Button;
     private javax.swing.JList<String> delivery_List;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
