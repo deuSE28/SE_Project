@@ -321,14 +321,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         try {
             File f1 = new File("C:\\DB\\RegistrationProduct.txt");
             FileWriter writer = new FileWriter(f1, true);
-            writer.write(name + '/');
-            writer.write(kategorie + '/');
-            writer.write(price + '/');
-            writer.write(quantity + '/');
-            writer.write(explanation + '/');
-            writer.write(trandingarea + '/');
-            writer.write(status + "\n");
-            // 라디오 버튼 선택된거에 따라 파일에 저장해야함
+            writer.write(name + "\t" + kategorie + "\t" + price + "\t" + quantity + "\t" + explanation + "\t" + trandingarea + "\t" + status + "\n");
             
             writer.flush();
             writer.close();

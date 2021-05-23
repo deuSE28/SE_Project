@@ -298,7 +298,7 @@ public class Join extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
             try {
-                lg.SWrite(id+" "+pw+" "+name+" "+email+" "+phone+" "+birth+" "+residence);
+                lg.SWrite(id+"\t"+pw+"\t"+name+"\t"+email+"\t"+phone+"\t"+birth+"\t"+residence);
                 dispose();
             } catch (IOException ex) {
                 Logger.getLogger(Join.class.getName()).log(Level.SEVERE, null, ex);

@@ -84,7 +84,7 @@ public class Login_Source implements FileInterface {
 
         for (int i = 0; i < readinfo.size(); i++) {
             line = readinfo.get(i);
-            String[] str = line.split(" ");
+            String[] str = line.split("\t");
             logininfo.add(new LogindataInfo(str[0],str[1]));
         }
     }
