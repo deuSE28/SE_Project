@@ -59,7 +59,7 @@ public class Login extends javax.swing.JFrame {
         SignUp_Button = new javax.swing.JButton();
         Login_Button = new javax.swing.JButton();
 
-        SignUp.setMinimumSize(new java.awt.Dimension(360, 500));
+        SignUp.setMinimumSize(new java.awt.Dimension(310, 255));
         SignUp.setName("SignUp"); // NOI18N
 
         jLabel3.setText("이름");
@@ -92,13 +92,14 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(SPhoneNum_Field)
-                        .addComponent(SID_Field)
-                        .addComponent(SName_Field)
-                        .addComponent(SPW_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                    .addComponent(SPhoneNum_Field)
+                    .addComponent(SPW_Field)
+                    .addComponent(SID_Field)
+                    .addGroup(SignUpLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(0, 42, Short.MAX_VALUE))
+                    .addComponent(SName_Field))
+                .addGap(99, 99, 99))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignUpLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SingUp_Check_Button)
@@ -125,7 +126,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(SPhoneNum_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(SingUp_Check_Button)
                 .addContainerGap())
         );

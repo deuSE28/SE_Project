@@ -5,7 +5,7 @@
     <Container class="javax.swing.JDialog" name="SignUp">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[360, 500]"/>
+          <Dimension value="[310, 255]"/>
         </Property>
         <Property name="name" type="java.lang.String" value="SignUp" noResource="true"/>
       </Properties>
@@ -23,15 +23,16 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="SPhoneNum_Field" max="32767" attributes="0"/>
-                          <Component id="SID_Field" max="32767" attributes="0"/>
-                          <Component id="SName_Field" alignment="0" max="32767" attributes="0"/>
-                          <Component id="SPW_Field" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="SPhoneNum_Field" max="32767" attributes="0"/>
+                      <Component id="SPW_Field" alignment="0" max="32767" attributes="0"/>
+                      <Component id="SID_Field" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="42" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="SName_Field" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="100" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -65,7 +66,7 @@
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <Component id="SPhoneNum_Field" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <EmptySpace pref="41" max="32767" attributes="0"/>
                   <Component id="SingUp_Check_Button" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
