@@ -6,13 +6,20 @@
 package deu.cse.team.bbs;
 
 import deu.cse.team.search.Search;
+import java.awt.Component;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  * 게시판 gui
@@ -70,17 +77,41 @@ public class Bbs extends javax.swing.JFrame {
     public void addRowToJTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Split> list = ListPost();
+        JLabel imageLabel;
+        ImageIcon imageicon;
+        Image img;
         Object rowData[] = new Object[5];
+        jTable1.getColumn("썸네일").setCellRenderer(new myTableCellRanderer());
         for(int i=0; i<list.size(); i++) {
-            rowData[0] = list.get(i).image;
+            imageLabel = new JLabel();
+            imageicon = new ImageIcon(list.get(i).image);
+            img = imageicon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(img));
+            rowData[0] = imageLabel;
             rowData[1] = list.get(i).name;
             rowData[2] = list.get(i).price;
             rowData[3] = list.get(i).status;
             rowData[4] = list.get(i).category;
             model.addRow(rowData);
+            System.out.println(imageicon);
         }
     }
-        
+    class myTableCellRanderer implements TableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table,
+                Object value,
+                boolean isSelected,
+                boolean hasFocus,
+                int row,
+                int column) {
+            TableColumn tb = jTable1.getColumn("썸네일");
+            tb.setMaxWidth(100);
+            tb.setMinWidth(100);
+ 
+            jTable1.setRowHeight(100);
+            return (Component) value;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,7 +134,15 @@ public class Bbs extends javax.swing.JFrame {
             new String [] {
                 "썸네일", "제품명", "가격", "거래지역", "카테고리"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("검색옵션");
