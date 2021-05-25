@@ -29,8 +29,9 @@ public class Bbs extends javax.swing.JFrame {
         addRowToJTable();
     }
     public class Split{
-        public String name, price, status, category;
-        public Split(String name,String price, String status, String category) {
+        public String image, name, price, status, category;
+        public Split(String image, String name,String price, String status, String category) {
+            this.image = image;
             this.name = name;
             this.price = price;
             this.status = status;
@@ -61,7 +62,7 @@ public class Bbs extends javax.swing.JFrame {
         for (int i = 0; i < list.size(); i++) {
             line = list.get(i);
             String[] str = line.split("\t");
-            splitlist.add(new Split(str[0],str[2], str[5], str[1]));
+            splitlist.add(new Split(str[3], str[0],str[2], str[6], str[1]));
         }
         return splitlist;
     }
@@ -71,7 +72,7 @@ public class Bbs extends javax.swing.JFrame {
         ArrayList<Split> list = ListPost();
         Object rowData[] = new Object[5];
         for(int i=0; i<list.size(); i++) {
-            rowData[0] = null;
+            rowData[0] = list.get(i).image;
             rowData[1] = list.get(i).name;
             rowData[2] = list.get(i).price;
             rowData[3] = list.get(i).status;

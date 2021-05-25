@@ -325,6 +325,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         String name = name_product.getText();
         String kategorie = kategorie_product.getSelectedItem().toString();
         String price = price_product.getText();
+        String image = imageroute.getText();
         String quantity = quantity_product.getText();
         String explanation = explanation_product.getText();
         String trandingarea = trandingarea_product.getSelectedItem().toString();
@@ -333,8 +334,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         try {
             File f1 = new File("C:\\DB\\RegistrationProduct.txt");
             FileWriter writer = new FileWriter(f1, true);
-            writer.write(name + "\t" + kategorie + "\t" + price + "\t" + quantity + "\t" + explanation + "\t" + trandingarea + "\t" + status + "\n");
-            
+            writer.write(name + "\t" + kategorie + "\t" + price + "\t" + image + "\t" + quantity + "\t" + explanation + "\t" + trandingarea + "\t" + status + "\n");
             writer.flush();
             writer.close();
         } catch (IOException e) {
@@ -374,16 +374,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         fileChooser.showOpenDialog(fchoose);
 
         String selectedFile = fileChooser.getSelectedFile().toString(); // 파일 경로
-        
-        try {
-            File f2 = new File("C:\\DB\\RegistrationProduct_Image.txt");
-            FileWriter writer = new FileWriter(f2, true);
-            writer.write(selectedFile + '\n');
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("오류발생");
-        }
+        imageroute.setText("" + selectedFile);
     }//GEN-LAST:event_filechooser_buttonActionPerformed
 
     private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed
