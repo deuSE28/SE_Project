@@ -5,13 +5,17 @@
  */
 package deu.cse.team.user_management;
 
+import deu.cse.team.mainmenu.AdminMenu;
 import deu.cse.team.source.Check_BlackList;
 import deu.cse.team.source.SignUpdataInfo;
 import deu.cse.team.source.SignUp;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -182,6 +186,11 @@ public class User_Management extends javax.swing.JFrame {
         jTabbedPane2.addTab("블랙리스트 삭제", jPanel4);
 
         Back_Button.setText("이전");
+        Back_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Back_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,12 +275,136 @@ public class User_Management extends javax.swing.JFrame {
     }//GEN-LAST:event_Load_BlackKList_ButtonActionPerformed
 
     private void BlackList_Add_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlackList_Add_ButtonActionPerformed
-        
+        try {
+            DefaultTableModel usermodel = (DefaultTableModel) User_Table.getModel();
+            int nRow = -1;
+            int nCol = -1;
+
+            nRow = User_Table.getSelectedRow();
+            nCol = User_Table.getSelectedColumn();
+
+            String id = null;
+            String pw = null;
+            String name = null;
+            String email = null;
+            String phone = null;
+            String birth = null;
+            String residence = null;
+
+            if(nRow == -1 && nCol == -1) {
+                JOptionPane.showMessageDialog(null, "선택된 값이 없습니다.");
+            } else {
+                Object Id = usermodel.getValueAt(nRow, 0);
+                Object Pw = usermodel.getValueAt(nRow, 1);
+                Object Name = usermodel.getValueAt(nRow, 2);
+                Object Email = usermodel.getValueAt(nRow, 3);
+                Object Phone = usermodel.getValueAt(nRow, 4);
+                Object Birth = usermodel.getValueAt(nRow, 5);
+                Object Residence = usermodel.getValueAt(nRow, 6);
+
+                id = Id.toString();
+                pw = Pw.toString();
+                name = Name.toString();
+                email = Email.toString();
+                phone = Phone.toString();
+                birth = Birth.toString();
+                residence = Residence.toString();
+                
+                Check_BlackList Blackdata = new Check_BlackList();
+                Blackdata.FWrite(id+"\t"+pw+"\t"+name+"\t"+email+"\t"+phone+"\t"+birth+"\t"+residence);
+            }
+            
+            SignUp Userdata = new SignUp();
+            Userdata.FRead();
+            Userdata.Split();
+            
+            Userinfo = Userdata.returnSignUpInfo();
+            
+            for (int i = 0 ; i < Userinfo.size() ; i++){
+                if (Userinfo.get(i).getId().equals(id)){
+                    Userinfo.remove(i);
+                }
+                BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\userList.txt", false));
+                log.close();
+                for (int j = 0; j < Userinfo.size(); j++) {
+                    String str = Userinfo.get(j).getId() + "\t" + Userinfo.get(j).getPw() + "\t" + Userinfo.get(j).getName() + "\t" + Userinfo.get(j).getEmail() + "\t" + Userinfo.get(j).getPhonenum() + "\t" + Userinfo.get(j).getBirth() + "\t" + Userinfo.get(j).getResidence();
+                    Userdata.FWrite(str);
+                }
+                JOptionPane.showMessageDialog(null, "블랙리스트에 추가되었습니다.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(User_Management.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BlackList_Add_ButtonActionPerformed
 
     private void BlackList_Del_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlackList_Del_ButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            DefaultTableModel blackmodel = (DefaultTableModel) Black_Table.getModel();
+            int nRow = -1;
+            int nCol = -1;
+
+            nRow = Black_Table.getSelectedRow();
+            nCol = Black_Table.getSelectedColumn();
+
+            String id = null;
+            String pw = null;
+            String name = null;
+            String email = null;
+            String phone = null;
+            String birth = null;
+            String residence = null;
+
+            if(nRow == -1 && nCol == -1) {
+                JOptionPane.showMessageDialog(null, "선택된 값이 없습니다.");
+            } else {
+                Object Id = blackmodel.getValueAt(nRow, 0);
+                Object Pw = blackmodel.getValueAt(nRow, 1);
+                Object Name = blackmodel.getValueAt(nRow, 2);
+                Object Email = blackmodel.getValueAt(nRow, 3);
+                Object Phone = blackmodel.getValueAt(nRow, 4);
+                Object Birth = blackmodel.getValueAt(nRow, 5);
+                Object Residence = blackmodel.getValueAt(nRow, 6);
+
+                id = Id.toString();
+                pw = Pw.toString();
+                name = Name.toString();
+                email = Email.toString();
+                phone = Phone.toString();
+                birth = Birth.toString();
+                residence = Residence.toString();
+                
+                SignUp Userdata = new SignUp();
+                Userdata.FWrite(id+"\t"+pw+"\t"+name+"\t"+email+"\t"+phone+"\t"+birth+"\t"+residence);
+            }
+            
+            Check_BlackList Blackdata = new Check_BlackList();
+            Blackdata.FRead();
+            Blackdata.Split();
+            
+            Blackinfo = Blackdata.returnBlackListInfo();
+            
+            for (int i = 0 ; i < Blackinfo.size() ; i++){
+                if (Blackinfo.get(i).getId().equals(id)){
+                    Blackinfo.remove(i);
+                }
+                BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\blackList.txt", false));
+                log.close();
+                for (int j = 0; j < Blackinfo.size(); j++) {
+                    String str = Blackinfo.get(j).getId() + "\t" + Blackinfo.get(j).getPw() + "\t" + Blackinfo.get(j).getName() + "\t" + Blackinfo.get(j).getEmail() + "\t" + Blackinfo.get(j).getPhonenum() + "\t" + Blackinfo.get(j).getBirth() + "\t" + Blackinfo.get(j).getResidence();
+                    Blackdata.FWrite(str);
+                }
+                JOptionPane.showMessageDialog(null, "블랙리스트가 해제되었습니다.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(User_Management.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BlackList_Del_ButtonActionPerformed
+
+    private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed
+        AdminMenu am = new AdminMenu();
+        am.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_Back_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
