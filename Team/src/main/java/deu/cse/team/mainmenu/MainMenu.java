@@ -7,6 +7,7 @@ package deu.cse.team.mainmenu;
 
 import deu.cse.team.Delivery.Delivery_Frame;
 import deu.cse.team.product_registration.RegistrationProduct_Frame;
+import deu.cse.team.login.Login;
 
 /**
  *
@@ -33,6 +34,7 @@ public class MainMenu extends javax.swing.JFrame {
         RegistrationProduct_Button = new javax.swing.JButton();
         ProductSearch_Button = new javax.swing.JButton();
         Delivery_Button = new javax.swing.JButton();
+        LogOut_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +59,13 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        LogOut_button.setText("로그아웃");
+        LogOut_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogOut_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,6 +77,10 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(RegistrationProduct_Button)
                     .addComponent(ProductSearch_Button))
                 .addContainerGap(167, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LogOut_button)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,7 +91,9 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(ProductSearch_Button)
                 .addGap(18, 18, 18)
                 .addComponent(Delivery_Button)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(LogOut_button)
+                .addContainerGap())
         );
 
         pack();
@@ -99,6 +114,12 @@ public class MainMenu extends javax.swing.JFrame {
         DF.setVisible(true);
         dispose();
     }//GEN-LAST:event_Delivery_ButtonActionPerformed
+
+    private void LogOut_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOut_buttonActionPerformed
+        Login lg = new Login();
+        lg.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_LogOut_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +159,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delivery_Button;
+    private javax.swing.JButton LogOut_button;
     private javax.swing.JButton ProductSearch_Button;
     private javax.swing.JButton RegistrationProduct_Button;
     // End of variables declaration//GEN-END:variables
