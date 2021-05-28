@@ -18,8 +18,7 @@ public class SignUpdataInfo {
     private String birth;
     private String residence;
     
-    
-    
+   
     public SignUpdataInfo(String id, String pw, String name, String email, String phonenum, String birth, String residence){
         this.id = id;
         this.pw = pw;
