@@ -7,7 +7,7 @@ package deu.cse.team.login;
 
 import deu.cse.team.source.Login_Source;
 import deu.cse.team.source.LogindataInfo;
-import deu.cse.team.mainmenu.MainMenu;
+import deu.cse.team.mainmenu.*;
 import deu.cse.team.source.SignUp;
 import deu.cse.team.source.SignUpdataInfo;
 import java.io.IOException;
@@ -362,7 +362,7 @@ public class Login extends javax.swing.JFrame {
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    MainMenu next = new MainMenu();
+                    AdminMenu next = new AdminMenu();
                     next.setVisible(true);
                     dispose();
                     a = true;
@@ -425,6 +425,9 @@ public class Login extends javax.swing.JFrame {
             if (!"".equals(sid) && !"".equals(spw) && !"".equals(sname) && !"".equals(sphone)) {
                 if (!spw.equals(pwcheckPasswordField.getText())){
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+                } else if( "admin".equals(sid)){
+                    JOptionPane.showMessageDialog(null, "사용불가능한 아이디입니다.");
+                    idTextField.setText("");
                 } else{
                     if (count == 1) {
                         create.FWrite(b);
