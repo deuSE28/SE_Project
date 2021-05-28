@@ -68,9 +68,9 @@ public class Login extends javax.swing.JFrame {
         SignUp_Button = new javax.swing.JButton();
         Login_Button = new javax.swing.JButton();
 
-        SignUp.setMinimumSize(new java.awt.Dimension(384, 498));
+        SignUp.setMinimumSize(new java.awt.Dimension(384, 520));
         SignUp.setName("SignUp"); // NOI18N
-        SignUp.setPreferredSize(new java.awt.Dimension(384, 498));
+        SignUp.setPreferredSize(new java.awt.Dimension(384, 520));
 
         SingUp_Check_Button.setText("확인");
         SingUp_Check_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +180,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(titleLabel)
                 .addGap(147, 147, 147))
             .addGroup(SignUpLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(37, 37, 37)
                 .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(SignUpLayout.createSequentialGroup()
                         .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -214,7 +214,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignUpLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(titleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -246,11 +246,11 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(residenceLabel)
                     .addComponent(residenceComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(18, 18, 18)
                 .addGroup(SignUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(SingUp_Check_Button))
-                .addGap(35, 35, 35))
+                .addGap(64, 64, 64))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -447,7 +447,7 @@ public class Login extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        dispose();
+        SignUp.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void birthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthTextFieldActionPerformed
