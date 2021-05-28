@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 /**
  * 게시판 gui
@@ -36,13 +37,16 @@ public class Bbs extends javax.swing.JFrame {
         addRowToJTable();
     }
     public class Split{
-        public String image, name, price, status, category;
-        public Split(String image, String name,String price, String status, String category) {
+        public String image, name, price, location, category, quantity, status, explanation;
+        public Split(String image, String name,String price, String location, String category, String quantity, String status, String explanation) {
             this.image = image;
             this.name = name;
             this.price = price;
-            this.status = status;
+            this.location = location;
             this.category = category;
+            this.quantity = quantity;
+            this.status = status;
+            this.explanation = explanation;
         }
     }
     // 게시글을 읽어오는 ArrayList
@@ -69,31 +73,36 @@ public class Bbs extends javax.swing.JFrame {
         for (int i = 0; i < list.size(); i++) {
             line = list.get(i);
             String[] str = line.split("\t");
-            splitlist.add(new Split(str[3], str[0],str[2], str[6], str[1]));
+            splitlist.add(new Split(str[3], str[0],str[2], str[6], str[1], str[4], str[7], str[5]));
         }
         return splitlist;
+    }
+    
+    public Image setIconImage(String imgLocation, int width, int height) {
+        ImageIcon imageicon = new ImageIcon(imgLocation);
+        Image img = imageicon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return img;
     }
     
     public void addRowToJTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Split> list = ListPost();
         JLabel imageLabel;
-        ImageIcon imageicon;
-        Image img;
-        Object rowData[] = new Object[5];
+        Object rowData[] = new Object[9];
         jTable1.getColumn("썸네일").setCellRenderer(new myTableCellRanderer());
         for(int i=0; i<list.size(); i++) {
             imageLabel = new JLabel();
-            imageicon = new ImageIcon(list.get(i).image);
-            img = imageicon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            imageLabel.setIcon(new ImageIcon(img));
+            imageLabel.setIcon(new ImageIcon(setIconImage(list.get(i).image, 100, 100)));
             rowData[0] = imageLabel;
             rowData[1] = list.get(i).name;
             rowData[2] = list.get(i).price;
-            rowData[3] = list.get(i).status;
+            rowData[3] = list.get(i).location;
             rowData[4] = list.get(i).category;
+            rowData[5] = list.get(i).quantity;
+            rowData[6] = list.get(i).status;
+            rowData[7] = list.get(i).explanation;
+            rowData[8] = list.get(i).image;
             model.addRow(rowData);
-            System.out.println(imageicon);
         }
     }
     class myTableCellRanderer implements TableCellRenderer {
@@ -121,29 +130,191 @@ public class Bbs extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        productInfo = new javax.swing.JDialog();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        imageLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        priceLabel = new javax.swing.JLabel();
+        statusLabel = new javax.swing.JLabel();
+        locationLabel = new javax.swing.JLabel();
+        categoryLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        quantityLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        explanationTextArea = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
+
+        jLabel1.setText("제품명 : ");
+
+        jLabel2.setText("가격 : ");
+
+        jLabel3.setText("제품상태 : ");
+
+        jLabel4.setText("카테고리 : ");
+
+        jLabel5.setText("거래지역 : ");
+
+        nameLabel.setText("jLabel6");
+
+        priceLabel.setText("jLabel7");
+
+        statusLabel.setText("jLabel8");
+
+        locationLabel.setText("jLabel9");
+
+        categoryLabel.setText("jLabel6");
+
+        jLabel6.setText("수량 : ");
+
+        quantityLabel.setText("jLabel7");
+
+        explanationTextArea.setColumns(20);
+        explanationTextArea.setRows(5);
+        jScrollPane2.setViewportView(explanationTextArea);
+
+        javax.swing.GroupLayout productInfoLayout = new javax.swing.GroupLayout(productInfo.getContentPane());
+        productInfo.getContentPane().setLayout(productInfoLayout);
+        productInfoLayout.setHorizontalGroup(
+            productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productInfoLayout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(88, 88, 88))
+            .addGroup(productInfoLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(productInfoLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(categoryLabel))
+                    .addGroup(productInfoLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(productInfoLayout.createSequentialGroup()
+                                .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(priceLabel)
+                                    .addComponent(nameLabel)))
+                            .addGroup(productInfoLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statusLabel))
+                            .addGroup(productInfoLayout.createSequentialGroup()
+                                .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(quantityLabel)
+                                    .addComponent(locationLabel)))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        productInfoLayout.setVerticalGroup(
+            productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(productInfoLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(categoryLabel))
+                .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(productInfoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(nameLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(priceLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(statusLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(locationLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(quantityLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productInfoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(productInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(37, 37, 37))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "썸네일", "제품명", "가격", "거래지역", "카테고리"
+                "썸네일", "제품명", "가격", "거래지역", "카테고리", "수량", "제품상태", "제품설명", "이미지경로"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(5).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(5).setMaxWidth(0);
+            jTable1.getColumnModel().getColumn(6).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(6).setMaxWidth(0);
+            jTable1.getColumnModel().getColumn(7).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(7).setMaxWidth(0);
+            jTable1.getColumnModel().getColumn(8).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(8).setMaxWidth(0);
+        }
 
         jButton1.setText("검색옵션");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -182,6 +353,27 @@ public class Bbs extends javax.swing.JFrame {
         searchFrame.setDefaultCloseOperation(Search.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        TableModel data = jTable1.getModel();
+        
+        imageLabel.setIcon(new ImageIcon(setIconImage((String)data.getValueAt(row, 8), 160, 180)));
+        nameLabel.setText((String)data.getValueAt(row, 1));
+        priceLabel.setText((String)data.getValueAt(row, 2));
+        locationLabel.setText((String)data.getValueAt(row, 3));
+        categoryLabel.setText((String)data.getValueAt(row, 4));
+        quantityLabel.setText((String)data.getValueAt(row, 5));
+        statusLabel.setText((String)data.getValueAt(row, 6));
+        explanationTextArea.setText((String)data.getValueAt(row, 7));
+        explanationTextArea.setEditable(false);
+        productInfo.setVisible(true);
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -218,8 +410,26 @@ public class Bbs extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel categoryLabel;
+    private javax.swing.JTextArea explanationTextArea;
+    private javax.swing.JLabel imageLabel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel locationLabel;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel priceLabel;
+    private javax.swing.JDialog productInfo;
+    private javax.swing.JLabel quantityLabel;
+    private javax.swing.JLabel statusLabel;
     // End of variables declaration//GEN-END:variables
 }
