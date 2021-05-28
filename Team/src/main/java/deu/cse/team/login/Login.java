@@ -391,13 +391,16 @@ public class Login extends javax.swing.JFrame {
     private void SingUp_Check_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SingUp_Check_ButtonActionPerformed
         SignUp create = new SignUp();
         create.FRead();
-
+        create.Split();
+        
+        
         try {
-            create.Split();
             signupinfo = create.returnSignUpInfo();
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         String sid = idTextField.getText();
         String spw = pwPasswordField.getText();
         String sname = nameTextField.getText();
@@ -415,11 +418,14 @@ public class Login extends javax.swing.JFrame {
                 idTextField.setText("");
                 count = 0;
                 break;
+            } else {
             }
         }
         try {
             if (!"".equals(sid) && !"".equals(spw) && !"".equals(sname) && !"".equals(sphone)) {
                 if (!spw.equals(pwcheckPasswordField.getText())){
+                    JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+                } else{
                     if (count == 1) {
                         create.FWrite(b);
                         JOptionPane.showMessageDialog(null, "회원 가입 완료");
