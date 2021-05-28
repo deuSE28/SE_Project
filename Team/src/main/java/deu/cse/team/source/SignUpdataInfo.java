@@ -12,7 +12,6 @@ package deu.cse.team.source;
 public class SignUpdataInfo {
     private String id;
     private String pw;
-    private String pw_check;
     private String name;
     private String email;
     private String phonenum;
@@ -64,14 +63,6 @@ public class SignUpdataInfo {
         this.phonenum = phonenum;
     }
 
-    public String getPw_check() {
-        return pw_check;
-    }
-
-    public void setPw_check(String pw_check) {
-        this.pw_check = pw_check;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -92,7 +83,7 @@ public class SignUpdataInfo {
         return residence;
     }
 
-    public void setResidence(String region) {
+    public void setResidence(String residence) {
         this.residence = residence;
     }
     
