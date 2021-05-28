@@ -11,7 +11,9 @@ import deu.cse.team.mainmenu.*;
 import deu.cse.team.source.SignUp;
 import deu.cse.team.source.SignUpdataInfo;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -338,13 +340,16 @@ public class Login extends javax.swing.JFrame {
         Login_Source lg = new Login_Source();
         lg.FRead();
         lg.Split();
-
+        
         try{
             logininfo = lg.returnLogininfo();
         } catch (IOException ex){
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        String time = format1.format(new Date());
+        
         String id;
         String pw;
 
@@ -371,6 +376,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "로그인 성공");
                     try {
                         lg.FWrite(id);
+                        lg.LWrite(id+"\t"+pw+"\t"+time);
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
