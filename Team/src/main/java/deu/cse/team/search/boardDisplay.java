@@ -11,7 +11,7 @@ package deu.cse.team.search;
  */
 public class boardDisplay extends Display {
     @Override
-    public void board() {
-        System.out.println("기본 게시판 내용 표시");
+    public String board() {
+        return "기본";
     }
 }

@@ -10,5 +10,5 @@ package deu.cse.team.search;
  * @author CHANG
  */
 public abstract class Display {
-    public abstract void board();
+    public abstract String board();
 }

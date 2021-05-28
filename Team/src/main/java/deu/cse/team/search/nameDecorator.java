@@ -6,16 +6,16 @@
 package deu.cse.team.search;
 
 /**
- * 가격을 추가하는 클래스
+ * 제품명을 추가하는 클래스
  * @author CHANG
  */
-public class priceDecorator extends DisplayDecorator {
+public class nameDecorator extends DisplayDecorator {
     // 기존 표시 클래스의 설정
-    public priceDecorator(Display decoratedDisplay) {
+    public nameDecorator(Display decoratedDisplay) {
         super(decoratedDisplay);
     }
     @Override
     public String board() {
-        return super.board() + ",가격"; // 설정된 기존 표시 기능을 수행
+        return super.board() + ",제품명";
     }
 }

@@ -16,7 +16,7 @@ public abstract class DisplayDecorator extends Display {
         this.decoratedDisplay = decoratedDisplay;
     }
     @Override
-    public void board() {
-        decoratedDisplay.board();
+    public String board() {
+        return decoratedDisplay.board();
     }
 }

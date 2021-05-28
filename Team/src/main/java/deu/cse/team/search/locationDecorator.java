@@ -15,12 +15,7 @@ public class locationDecorator extends DisplayDecorator {
         super(decoratedDisplay);
     }
     @Override
-    public void board() {
-        super.board(); // 설정된 기존 표시 기능을 수행
-        selectedLocation(); // 추가적으로 선택된 거래 지역을 표시
-    }
-    // 선택된 거래 지역을 표시하는 기능만 직접 제공
-    private void selectedLocation() {
-        System.out.println("선택된 거래지역 표시");
+    public String board() {
+        return super.board() + ",거래지역";
     }
 }
