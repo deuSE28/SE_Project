@@ -20,9 +20,31 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
      */
     public RegistrationProduct_Frame() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Product Registration Page");
+        cmbList();
     }
-
+    
+    // 콤보박스에 카테고리를 불러옴
+    public void cmbList() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel<>();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("C:\\DB\\category.txt"));
+            int val = Integer.parseInt(br.readLine());
+            for (int i=0; i<val; i++) {
+                String line = br.readLine();
+                model.addElement(line);
+                kategorie_product.setModel(model);
+            }
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("파일이 존재하지않습니다. 경로를 확인해주세요");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,6 +55,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
+        statusButtonGroup = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         name_product = new javax.swing.JTextField();
@@ -54,6 +77,8 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         appointment_button = new javax.swing.JButton();
         filechooser_button = new javax.swing.JButton();
         Back_Button = new javax.swing.JButton();
+        imageroute = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,7 +99,12 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel3.setText("카테고리 :");
 
         kategorie_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
-        kategorie_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "수입명품", "패션의류", "패션잡화", "뷰티", "출산/유아동", "모바일/태블릿", "가전제품", "노트북/데스크탑", "카메라/캠코더", "가구/인테리어", "리빙/생활", "게임", "반려동물/취미", "도서/음반/문구", "티켓/쿠폰", "스포츠", "레저/여행", "오토바이", "공구/산업용품" }));
+        kategorie_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
+        kategorie_product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategorie_productActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel4.setText("판매 가격 :");
@@ -123,6 +153,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel9.setText("제품 상태 :");
 
+        statusButtonGroup.add(unopened_radio);
         unopened_radio.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         unopened_radio.setText("미개봉");
         unopened_radio.addActionListener(new java.awt.event.ActionListener() {
@@ -131,11 +162,23 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             }
         });
 
+        statusButtonGroup.add(almostnew_radio);
         almostnew_radio.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         almostnew_radio.setText("거의새것");
+        almostnew_radio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                almostnew_radioActionPerformed(evt);
+            }
+        });
 
+        statusButtonGroup.add(used_radio);
         used_radio.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         used_radio.setText("중고");
+        used_radio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                used_radioActionPerformed(evt);
+            }
+        });
 
         appointment_button.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         appointment_button.setText("등록완료");
@@ -159,6 +202,8 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("경로 :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,7 +223,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(unopened_radio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(almostnew_radio)
                         .addGap(18, 18, 18)
                         .addComponent(used_radio)
@@ -194,8 +239,13 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(trandingarea_product, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGap(78, 78, 78)))
-                            .addComponent(filechooser_button))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(filechooser_button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(imageroute, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,7 +280,10 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(filechooser_button))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(filechooser_button)
+                        .addComponent(jLabel11))
+                    .addComponent(imageroute, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -272,22 +325,16 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         String name = name_product.getText();
         String kategorie = kategorie_product.getSelectedItem().toString();
         String price = price_product.getText();
+        String image = imageroute.getText();
         String quantity = quantity_product.getText();
         String explanation = explanation_product.getText();
         String trandingarea = trandingarea_product.getSelectedItem().toString();
-        // 라디오 버튼 3개 값 가져와야함
+        String status = statusButtonGroup.getSelection().getActionCommand();
         
         try {
             File f1 = new File("C:\\DB\\RegistrationProduct.txt");
             FileWriter writer = new FileWriter(f1, true);
-            writer.write(name + '/');
-            writer.write(kategorie + '/');
-            writer.write(price + '/');
-            writer.write(quantity + '/');
-            writer.write(explanation + '/');
-            writer.write(trandingarea + '\n');
-            // 라디오 버튼 선택된거에 따라 파일에 저장해야함
-            
+            writer.write(name + "\t" + kategorie + "\t" + price + "\t" + image + "\t" + quantity + "\t" + explanation + "\t" + trandingarea + "\t" + status + "\n");
             writer.flush();
             writer.close();
         } catch (IOException e) {
@@ -317,16 +364,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
 
     private void unopened_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unopened_radioActionPerformed
         // TODO add your handling code here:
-        ButtonGroup state_radio = new ButtonGroup(); // 라디오버튼 그룹화
-        
-        state_radio.add(unopened_radio);
-        state_radio.add(almostnew_radio);
-        state_radio.add(used_radio);
-        
-        this.add(unopened_radio);
-        this.add(almostnew_radio);
-        this.add(used_radio);
-        
+        unopened_radio.setActionCommand("미개봉");
     }//GEN-LAST:event_unopened_radioActionPerformed
 
     private void filechooser_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filechooser_buttonActionPerformed
@@ -336,16 +374,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         fileChooser.showOpenDialog(fchoose);
 
         String selectedFile = fileChooser.getSelectedFile().toString(); // 파일 경로
-        
-        try {
-            File f2 = new File("C:\\DB\\RegistrationProduct_Image.txt");
-            FileWriter writer = new FileWriter(f2, true);
-            writer.write(selectedFile + '\n');
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("오류발생");
-        }
+        imageroute.setText("" + selectedFile);
     }//GEN-LAST:event_filechooser_buttonActionPerformed
 
     private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed
@@ -354,7 +383,20 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_Back_ButtonActionPerformed
 
-    /**
+    private void kategorie_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorie_productActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kategorie_productActionPerformed
+
+    private void almostnew_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_almostnew_radioActionPerformed
+        // TODO add your handling code here:
+        almostnew_radio.setActionCommand("거의새것");
+    }//GEN-LAST:event_almostnew_radioActionPerformed
+
+    private void used_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_used_radioActionPerformed
+        // TODO add your handling code here:
+        used_radio.setActionCommand("중고");
+    }//GEN-LAST:event_used_radioActionPerformed
+        /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -379,7 +421,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RegistrationProduct_Frame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -395,8 +436,10 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private javax.swing.JButton appointment_button;
     private javax.swing.JTextField explanation_product;
     private javax.swing.JButton filechooser_button;
+    private javax.swing.JLabel imageroute;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -405,10 +448,11 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JComboBox<String> kategorie_product;
+    public static javax.swing.JComboBox<String> kategorie_product;
     private javax.swing.JTextField name_product;
     private javax.swing.JTextField price_product;
     private javax.swing.JTextField quantity_product;
+    private javax.swing.ButtonGroup statusButtonGroup;
     private javax.swing.JComboBox<String> trandingarea_product;
     private javax.swing.JRadioButton unopened_radio;
     private javax.swing.JRadioButton used_radio;
