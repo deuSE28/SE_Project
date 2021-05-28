@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package deu.cse.team.search;
+package deu.cse.team.bbs;
 
 /**
- * 가격을 추가하는 클래스
+ * 거래지역을 추가하는 클래스
  * @author CHANG
  */
-public class priceDecorator extends DisplayDecorator {
+public class locationDecorator extends DisplayDecorator {
     // 기존 표시 클래스의 설정
-    public priceDecorator(Display decoratedDisplay) {
+    public locationDecorator(Display decoratedDisplay) {
         super(decoratedDisplay);
     }
     @Override
     public String board() {
-        return super.board() + ",가격"; // 설정된 기존 표시 기능을 수행
+        return super.board() + ",거래지역";
     }
 }
