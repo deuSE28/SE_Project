@@ -82,6 +82,11 @@ public class User_Management extends javax.swing.JFrame {
         });
 
         BlackList_Add_Button.setText("추가");
+        BlackList_Add_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BlackList_Add_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -141,6 +146,11 @@ public class User_Management extends javax.swing.JFrame {
         });
 
         BlackList_Del_Button.setText("삭제");
+        BlackList_Del_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BlackList_Del_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -254,6 +264,14 @@ public class User_Management extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_Load_BlackKList_ButtonActionPerformed
+
+    private void BlackList_Add_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlackList_Add_ButtonActionPerformed
+        
+    }//GEN-LAST:event_BlackList_Add_ButtonActionPerformed
+
+    private void BlackList_Del_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlackList_Del_ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BlackList_Del_ButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -174,6 +174,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xcd94;&#xac00;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BlackList_Add_ButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -298,6 +301,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xc0ad;&#xc81c;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BlackList_Del_ButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
