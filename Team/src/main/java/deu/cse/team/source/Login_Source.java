@@ -56,12 +56,21 @@ public class Login_Source implements FileInterface {
 
     @Override
     public void FWrite(String a) throws IOException {
-        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\loginlog.txt",false));
+        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\currentUser.txt",false));
         PrintWriter pw = new PrintWriter(log,true);
         pw.write(a+"\n");
         pw.flush();
         pw.close();
     }
+    
+    public void LWrite(String a) throws IOException {
+        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\loginlog.txt",true));
+        PrintWriter pw = new PrintWriter(log,true);
+        pw.write(a+"\n");
+        pw.flush();
+        pw.close();
+    }
+    
     public void AWrite(String a) throws IOException{
         BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\adminID.txt",false));
         PrintWriter pw = new PrintWriter(log,true);
