@@ -59,7 +59,7 @@ public class SignUp implements FileInterface {
         for (int i = 0; i < readinfo.size(); i++) {
             line = readinfo.get(i);
             String[] str = line.split(" ");
-            signupinfo.add(new SignUpdataInfo(str[0],str[1],str[2],str[3]));
+            signupinfo.add(new SignUpdataInfo(str[0],str[1],str[2],str[3],str[4],str[5],str[6]));
         }
     }
     
