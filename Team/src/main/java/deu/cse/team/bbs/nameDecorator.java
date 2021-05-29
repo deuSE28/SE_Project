@@ -16,6 +16,6 @@ public class nameDecorator extends DisplayDecorator {
     }
     @Override
     public String board() {
-        return super.board() + ",제품명";
+        return super.board() + "제품명";
     }
 }

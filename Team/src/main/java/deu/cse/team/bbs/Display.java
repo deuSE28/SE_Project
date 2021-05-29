@@ -10,5 +10,6 @@ package deu.cse.team.bbs;
  * @author CHANG
  */
 public abstract class Display {
+    Bbs bbs = new Bbs();
     public abstract String board();
 }

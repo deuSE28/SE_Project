@@ -57,6 +57,7 @@ public class Bbs extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    
     public class Split{
         public String image, name, price, location, category, quantity, status, explanation;
         public Split(String image, String name,String price, String location, String category, String quantity, String status, String explanation) {
@@ -98,7 +99,6 @@ public class Bbs extends javax.swing.JFrame {
         }
         return splitlist;
     }
-    
     public Image setIconImage(String imgLocation, int width, int height) {
         ImageIcon imageicon = new ImageIcon(imgLocation);
         Image img = imageicon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -109,23 +109,34 @@ public class Bbs extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Split> list = ListPost();
         JLabel imageLabel;
-        Object rowData[] = new Object[9];
+        ImageIcon loading = new ImageIcon("C:\\DB\\image\\loading.png");
         jTable1.getColumn("썸네일").setCellRenderer(new myTableCellRanderer());
-        for(int i=0; i<list.size(); i++) {
+        for(int i=0; i<list.size(); i++) {      
+            if (nameCheck(list.get(i).name)) {
             imageLabel = new JLabel();
+            imageLabel.setIcon(loading);
+            model.insertRow(model.getRowCount(), new Object[]{
+            imageLabel,
+            list.get(i).name,
+            list.get(i).price,
+            list.get(i).location,
+            list.get(i).category,
+            list.get(i).quantity,
+            list.get(i).status,
+            list.get(i).explanation,
+            list.get(i).image
+            });
             imageLabel.setIcon(new ImageIcon(setIconImage(list.get(i).image, 100, 100)));
-            rowData[0] = imageLabel;
-            rowData[1] = list.get(i).name;
-            rowData[2] = list.get(i).price;
-            rowData[3] = list.get(i).location;
-            rowData[4] = list.get(i).category;
-            rowData[5] = list.get(i).quantity;
-            rowData[6] = list.get(i).status;
-            rowData[7] = list.get(i).explanation;
-            rowData[8] = list.get(i).image;
-            model.addRow(rowData);
+            }
         }
     }
+    public boolean nameCheck(String Dname) {
+        String Sname = nameTextField.getText();
+        if (nameTextField.getText().equals("") || Dname.equals(nameTextField.getText())) {
+            return true;
+        } else return false;
+    }
+    
     class myTableCellRanderer implements TableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table,
@@ -495,25 +506,39 @@ public class Bbs extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-        String name = nameTextField.getText();
-        String category = kategorie_product.getSelectedItem().toString();
-        String minPrice = minPriceTextField.getText();
-        String maxPrice = maxPriceTextField.getText();
-        String location = locationComboBox.getSelectedItem().toString();
-        Display board = new boardDisplay();
-        
-        if (!name.equals("")) { board = new nameDecorator(board); }
-        if (!category.equals("--전체--")) { board = new categoryDecorator(board); }
-        if (!minPrice.equals("") && !maxPrice.equals("")) { board = new priceDecorator(board); }
-        if (!location.equals("없음")) { board = new locationDecorator(board); }
-        
-        System.out.println(board.board());
-        search.setDefaultCloseOperation(search.DISPOSE_ON_CLOSE);
+//        String name = nameTextField.getText();
+//        String category = kategorie_product.getSelectedItem().toString();
+//        String minPrice = minPriceTextField.getText();
+//        String maxPrice = maxPriceTextField.getText();
+//        String location = locationComboBox.getSelectedItem().toString();
+//        
+//        Display board = new boardDisplay();
+//        
+//        if (!name.equals("")) { 
+//            board = new nameDecorator(board);
+//        }
+//        if (!category.equals("--전체--")) {
+//            board = new categoryDecorator(board);
+//            isChecked[1] = true;
+//        }
+//        if (!minPrice.equals("") && !maxPrice.equals("")) {
+//            board = new priceDecorator(board);
+//            isChecked[2] = true;
+//        }
+//        if (!location.equals("없음")) {
+//            board = new locationDecorator(board);
+//            isChecked[3] = true;
+//        }
+//        System.out.println(board.board());
+        search.dispose();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setNumRows(0);
+        addRowToJTable();
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        search.setDefaultCloseOperation(search.DISPOSE_ON_CLOSE);
+        search.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
@@ -579,7 +604,7 @@ public class Bbs extends javax.swing.JFrame {
     private javax.swing.JTextField maxPriceTextField;
     private javax.swing.JTextField minPriceTextField;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JTextField nameTextField;
+    public javax.swing.JTextField nameTextField;
     private javax.swing.JLabel priceLabel;
     private javax.swing.JDialog productInfo;
     private javax.swing.JLabel quantityLabel;
