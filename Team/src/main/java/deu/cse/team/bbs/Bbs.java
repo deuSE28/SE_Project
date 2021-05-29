@@ -13,9 +13,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -37,6 +39,8 @@ public class Bbs extends javax.swing.JFrame {
         addRowToJTable();
         cmbList();
     }
+    List<LogMemento.Memento> savedSearchLog = new ArrayList<LogMemento.Memento>();
+    LogMemento log = new LogMemento();
     // 콤보박스에 카테고리를 불러옴
     public void cmbList() {
         DefaultComboBoxModel model = new DefaultComboBoxModel<>();
@@ -129,7 +133,6 @@ public class Bbs extends javax.swing.JFrame {
             list.get(i).explanation,
             list.get(i).image
             });
-            
             }
         }
     }
@@ -139,7 +142,7 @@ public class Bbs extends javax.swing.JFrame {
             return false;
         } else return true;
     }
-    
+  
     class myTableCellRanderer implements TableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table,
@@ -196,6 +199,9 @@ public class Bbs extends javax.swing.JFrame {
         locationComboBox = new javax.swing.JComboBox<>();
         searchButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        logTable = new javax.swing.JTable();
+        jOptionPane1 = new javax.swing.JOptionPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -345,37 +351,66 @@ public class Bbs extends javax.swing.JFrame {
             }
         });
 
+        logTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "제품명", "카테고리", "최소가격", "최대가격", "거래지역"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        logTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logTableMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(logTable);
+
         javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search.getContentPane());
         search.getContentPane().setLayout(searchLayout);
         searchLayout.setHorizontalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(locationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(searchLayout.createSequentialGroup()
+                                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(kategorie_product, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, searchLayout.createSequentialGroup()
+                                        .addComponent(minPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel11)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(maxPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(searchButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cancelButton)))
+                .addGap(69, 69, 69))
             .addGroup(searchLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(locationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(searchLayout.createSequentialGroup()
-                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(kategorie_product, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, searchLayout.createSequentialGroup()
-                                .addComponent(minPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel11)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(maxPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(searchLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(searchButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cancelButton)
-                .addGap(69, 69, 69))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         searchLayout.setVerticalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +433,9 @@ public class Bbs extends javax.swing.JFrame {
                 .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(locationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchButton)
                     .addComponent(cancelButton))
@@ -509,40 +546,50 @@ public class Bbs extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-//        String name = nameTextField.getText();
-//        String category = kategorie_product.getSelectedItem().toString();
-//        String minPrice = minPriceTextField.getText();
-//        String maxPrice = maxPriceTextField.getText();
-//        String location = locationComboBox.getSelectedItem().toString();
-//        
-//        Display board = new boardDisplay();
-//        
-//        if (!name.equals("")) { 
-//            board = new nameDecorator(board);
-//        }
-//        if (!category.equals("--전체--")) {
-//            board = new categoryDecorator(board);
-//            isChecked[1] = true;
-//        }
-//        if (!minPrice.equals("") && !maxPrice.equals("")) {
-//            board = new priceDecorator(board);
-//            isChecked[2] = true;
-//        }
-//        if (!location.equals("없음")) {
-//            board = new locationDecorator(board);
-//            isChecked[3] = true;
-//        }
-//        System.out.println(board.board());
-        search.dispose();
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setNumRows(0);
-        addRowToJTable();
+        DefaultTableModel model = (DefaultTableModel) logTable.getModel();
+        String name = nameTextField.getText();
+        String category = kategorie_product.getSelectedItem().toString();
+        String minPrice = minPriceTextField.getText();
+        String maxPrice = maxPriceTextField.getText();
+        String location = locationComboBox.getSelectedItem().toString();
+        String str = name + "\t" + category + "\t" + minPrice + "\t" + maxPrice + "\t" + location;
+        log.setLog(str);
+        savedSearchLog.add(log.saveToMemento());
+        model.insertRow(model.getRowCount(), new Object[]{
+            name, category, minPrice, maxPrice, location
+        });
+        if (!minPrice.equals("") && !maxPrice.equals("")) {
+            if (Integer.parseInt(minPrice) > Integer.parseInt(maxPrice)) {
+                JOptionPane.showMessageDialog(null, "최소금액이 최대금액보다 큽니다.");
+            } else {
+                search.dispose();
+                model = (DefaultTableModel) jTable1.getModel();
+                model.setNumRows(0);
+                addRowToJTable();
+            }
+        } else {
+            search.dispose();
+            model = (DefaultTableModel) jTable1.getModel();
+            model.setNumRows(0);
+            addRowToJTable();
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         search.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void logTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logTableMouseClicked
+        // TODO add your handling code here:
+        
+        String[] restoredData = log.restoreFromMemento(savedSearchLog.get(logTable.getSelectedRow())).split("\t");
+        nameTextField.setText(restoredData[0]);
+        kategorie_product.setSelectedItem(restoredData[1]);
+        minPriceTextField.setText(restoredData[2]);
+        maxPriceTextField.setText(restoredData[3]);
+        locationComboBox.setSelectedItem(restoredData[4]);
+    }//GEN-LAST:event_logTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -598,12 +645,15 @@ public class Bbs extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     public javax.swing.JComboBox<String> kategorie_product;
     public javax.swing.JComboBox<String> locationComboBox;
     private javax.swing.JLabel locationLabel;
+    private javax.swing.JTable logTable;
     public javax.swing.JTextField maxPriceTextField;
     public javax.swing.JTextField minPriceTextField;
     private javax.swing.JLabel nameLabel;
