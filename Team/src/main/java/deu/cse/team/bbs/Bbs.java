@@ -112,9 +112,12 @@ public class Bbs extends javax.swing.JFrame {
         ImageIcon loading = new ImageIcon("C:\\DB\\image\\loading.png");
         jTable1.getColumn("썸네일").setCellRenderer(new myTableCellRanderer());
         for(int i=0; i<list.size(); i++) {      
-            if (nameCheck(list.get(i).name)) {
+            if (nameCheck(list.get(i).name))
+                continue;
+            else {
             imageLabel = new JLabel();
-            imageLabel.setIcon(loading);
+            Proxy_Image setThumbnail = new Proxy_Image(new ImageIcon(setIconImage(list.get(i).image, 100, 100)));
+            imageLabel.setIcon(setThumbnail.displayImage());
             model.insertRow(model.getRowCount(), new Object[]{
             imageLabel,
             list.get(i).name,
@@ -126,15 +129,15 @@ public class Bbs extends javax.swing.JFrame {
             list.get(i).explanation,
             list.get(i).image
             });
-            imageLabel.setIcon(new ImageIcon(setIconImage(list.get(i).image, 100, 100)));
+            
             }
         }
     }
     public boolean nameCheck(String Dname) {
         String Sname = nameTextField.getText();
         if (nameTextField.getText().equals("") || Dname.equals(nameTextField.getText())) {
-            return true;
-        } else return false;
+            return false;
+        } else return true;
     }
     
     class myTableCellRanderer implements TableCellRenderer {
@@ -598,11 +601,11 @@ public class Bbs extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> kategorie_product;
-    private javax.swing.JComboBox<String> locationComboBox;
+    public javax.swing.JComboBox<String> kategorie_product;
+    public javax.swing.JComboBox<String> locationComboBox;
     private javax.swing.JLabel locationLabel;
-    private javax.swing.JTextField maxPriceTextField;
-    private javax.swing.JTextField minPriceTextField;
+    public javax.swing.JTextField maxPriceTextField;
+    public javax.swing.JTextField minPriceTextField;
     private javax.swing.JLabel nameLabel;
     public javax.swing.JTextField nameTextField;
     private javax.swing.JLabel priceLabel;
