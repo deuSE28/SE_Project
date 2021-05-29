@@ -5,7 +5,6 @@
  */
 package deu.cse.team.product_registration;
 
-import deu.cse.team.product_registration.CategoryComponent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
