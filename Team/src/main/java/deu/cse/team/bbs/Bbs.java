@@ -553,21 +553,26 @@ public class Bbs extends javax.swing.JFrame {
         String maxPrice = maxPriceTextField.getText();
         String location = locationComboBox.getSelectedItem().toString();
         String str = name + "\t" + category + "\t" + minPrice + "\t" + maxPrice + "\t" + location;
-        log.setLog(str);
-        savedSearchLog.add(log.saveToMemento());
-        model.insertRow(model.getRowCount(), new Object[]{
-            name, category, minPrice, maxPrice, location
-        });
         if (!minPrice.equals("") && !maxPrice.equals("")) {
             if (Integer.parseInt(minPrice) > Integer.parseInt(maxPrice)) {
                 JOptionPane.showMessageDialog(null, "최소금액이 최대금액보다 큽니다.");
             } else {
+                log.setLog(str);
+                savedSearchLog.add(log.saveToMemento());
+                model.insertRow(model.getRowCount(), new Object[]{
+                    name, category, minPrice, maxPrice, location
+                });
                 search.dispose();
                 model = (DefaultTableModel) jTable1.getModel();
                 model.setNumRows(0);
                 addRowToJTable();
             }
         } else {
+            log.setLog(str);
+            savedSearchLog.add(log.saveToMemento());
+            model.insertRow(model.getRowCount(), new Object[]{
+                name, category, minPrice, maxPrice, location
+            });
             search.dispose();
             model = (DefaultTableModel) jTable1.getModel();
             model.setNumRows(0);
