@@ -8,6 +8,7 @@ package deu.cse.team.login;
 import deu.cse.team.source.Login_Source;
 import deu.cse.team.source.LogindataInfo;
 import deu.cse.team.mainmenu.*;
+import deu.cse.team.source.Check_BlackList;
 import deu.cse.team.source.SignUp;
 import deu.cse.team.source.SignUpdataInfo;
 import java.io.IOException;
@@ -25,7 +26,8 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     ArrayList<LogindataInfo> logininfo = new ArrayList<>();
     ArrayList<SignUpdataInfo> signupinfo = new ArrayList<>();
-    Boolean a;
+    ArrayList<SignUpdataInfo> blacklistinfo = new ArrayList<>();
+    Boolean a, black;
     
     /**
      * Creates new form NewJFrame
@@ -341,8 +343,13 @@ public class Login extends javax.swing.JFrame {
         lg.FRead();
         lg.Split();
         
+        Check_BlackList cb = new Check_BlackList();
+        cb.FRead();
+        cb.Split();
+        
         try{
             logininfo = lg.returnLogininfo();
+            blacklistinfo = cb.returnBlackListInfo();
         } catch (IOException ex){
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -357,7 +364,8 @@ public class Login extends javax.swing.JFrame {
         pw = PW_Field.getText();
 
         a = false;
-
+        black = true;
+        
         for (int i = 0; i < logininfo.size(); i++) {
             if (logininfo.get(i).getId().equals(id) && logininfo.get(i).getPw().equals(pw)) {
                 if (i == 0) {
@@ -390,7 +398,17 @@ public class Login extends javax.swing.JFrame {
             }
         }
         if (a == false) {
-            JOptionPane.showMessageDialog(null, "로그인 실패");
+            for(int i = 0; i < blacklistinfo.size(); i++){
+                if (blacklistinfo.get(i).getId().equals(id) && blacklistinfo.get(i).getPw().equals(pw)){
+                    black = false;
+                    break;
+                }
+            }            
+            if(black == true){
+                JOptionPane.showMessageDialog(null, "로그인 실패");
+            } else {
+                JOptionPane.showMessageDialog(null, "차단된 회원입니다.");
+            }
         }
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
@@ -399,8 +417,12 @@ public class Login extends javax.swing.JFrame {
         create.FRead();
         create.Split();
         
+        Check_BlackList cb = new Check_BlackList();
+        cb.FRead();
+        cb.Split();
         
         try {
+            blacklistinfo = cb.returnBlackListInfo();
             signupinfo = create.returnSignUpInfo();
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -416,7 +438,8 @@ public class Login extends javax.swing.JFrame {
         String sresidence = residenceComboBox.getSelectedItem().toString();
         
         String b = sid+"\t"+spw+"\t"+ sname+"\t"+ semail+"\t"+ sphone+"\t"+ sbirth+"\t"+ sresidence;
-
+        black = false;
+        
         int count = 1;
         for (int j = 0; j < signupinfo.size(); j++) {
             if (signupinfo.get(j).getId().equals(sid)) {
@@ -424,32 +447,53 @@ public class Login extends javax.swing.JFrame {
                 idTextField.setText("");
                 count = 0;
                 break;
-            } else {
             }
         }
         try {
             if (!"".equals(sid) && !"".equals(spw) && !"".equals(sname) && !"".equals(sphone)) {
-                if (!spw.equals(pwcheckPasswordField.getText())){
-                    JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
-                } else if( "admin".equals(sid)){
-                    JOptionPane.showMessageDialog(null, "사용불가능한 아이디입니다.");
-                    idTextField.setText("");
-                } else{
-                    if (count == 1) {
-                        create.FWrite(b);
-                        JOptionPane.showMessageDialog(null, "회원 가입 완료");
-                        idTextField.setText("");
-                        pwPasswordField.setText("");
-                        nameTextField.setText("");
-                        phoneTextField.setText("");
-                        pwcheckPasswordField.setText("");
-                        emailTextField.setText("");
-                        birthTextField.setText("");                        
-                        SignUp.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요");
+                for (int i = 0 ; i < blacklistinfo.size() ; i++) {
+                    if (blacklistinfo.get(i).getName().equals(sname) && blacklistinfo.get(i).getPhonenum().equals(sphone)){
+                        black = true;
+                        break;
                     }
                 }
+                if (black){
+                    JOptionPane.showMessageDialog(null, "차단된 회원입니다.\n 회원가입이 제한됩니다.");
+                    idTextField.setText("");
+                    pwPasswordField.setText("");
+                    nameTextField.setText("");
+                    phoneTextField.setText("");
+                    pwcheckPasswordField.setText("");
+                    emailTextField.setText("");
+                    birthTextField.setText("");                        
+                    SignUp.dispose();
+                } else{
+                    if (!spw.equals(pwcheckPasswordField.getText())){
+                        JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다\n 다시입력해주세요.");
+                        pwPasswordField.setText("");
+                        pwcheckPasswordField.setText("");
+                    } else if( "admin".equals(sid)){
+                        JOptionPane.showMessageDialog(null, "사용불가능한 아이디입니다.");
+                        idTextField.setText("");
+                    } else{
+                        if (count == 1) {
+                            create.FWrite(b);
+                            JOptionPane.showMessageDialog(null, "회원 가입 완료");
+                            idTextField.setText("");
+                            pwPasswordField.setText("");
+                            nameTextField.setText("");
+                            phoneTextField.setText("");
+                            pwcheckPasswordField.setText("");
+                            emailTextField.setText("");
+                            birthTextField.setText("");                        
+                            SignUp.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "아이디를 다시 입력해주세요.");
+                        }
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요");
             }
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
