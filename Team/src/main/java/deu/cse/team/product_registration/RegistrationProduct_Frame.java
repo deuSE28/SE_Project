@@ -36,7 +36,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
             for (int i=0; i<val; i++) {
                 String line = br.readLine();
                 model.addElement(line);
-                kategorie_product.setModel(model);
+                category_product.setModel(model);
             }
         } catch(FileNotFoundException e) {
             e.printStackTrace();
@@ -44,7 +44,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
     }
     
     /**
@@ -62,7 +61,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         name_product = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        kategorie_product = new javax.swing.JComboBox<>();
+        category_product = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         price_product = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -100,11 +99,11 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel3.setText("카테고리 :");
 
-        kategorie_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
-        kategorie_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
-        kategorie_product.addActionListener(new java.awt.event.ActionListener() {
+        category_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
+        category_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
+        category_product.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kategorie_productActionPerformed(evt);
+                category_productActionPerformed(evt);
             }
         });
 
@@ -236,7 +235,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                                 .addComponent(name_product)
                                 .addComponent(quantity_product)
                                 .addComponent(price_product)
-                                .addComponent(kategorie_product, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(category_product, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(explanation_product, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(trandingarea_product, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -269,7 +268,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                         .addGap(115, 115, 115)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(kategorie_product, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(category_product, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
@@ -327,7 +326,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private void appointment_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointment_buttonActionPerformed
         // TODO add your handling code here:
         String name = name_product.getText();
-        String kategorie = kategorie_product.getSelectedItem().toString();
+        String category = category_product.getSelectedItem().toString();
         String price = price_product.getText();
         String image = imageroute.getText();
         String quantity = quantity_product.getText();
@@ -339,28 +338,30 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         String status = statusButtonGroup.getSelection().getActionCommand();
         boolean check = true;
         
-        if(image.length()==0 || (name.length() == 0) || (price.length() == 0) || (quantity.length() == 0)
-                || (explanation.length() == 0)){
+        
+        if(image.length()==0 || (name.length() == 0) || (price.length() == 0) || (quantity.length() == 0) || (explanation.length() == 0)){
             check=false;
             JOptionPane.showMessageDialog(null, "정보를 입력해주세요.");
         }
        if(image.length()!=0 && name.length() != 0 && price.length() != 0 && quantity.length() != 0 && explanation.length() != 0) {
             check=true;
         }
-       if(check==true){
-           CategoryComponent category = new Category_composite(kategorie);
-  
-                CategoryComponent categoryAll = new Category_composite("카테고리");
-                categoryAll.add(category);
-  
-                category.add(new Product(name, price, image, quantity, explanation, trandingarea, status));
-                categoryAll.print(); // 텍스트파일에 저장
-                
-                JOptionPane.showMessageDialog(null, "등록이 완료 되었습니다.");
-                MainMenu mainmenu = new MainMenu();
-                mainmenu.setVisible(true);
-                dispose();
-       }
+       
+        // 모든 정보를 입력했을 때
+       if(check==true){ 
+            CategoryComponent categorycom = new Category_composite(category);
+            CategoryComponent categoryAll = new Category_composite("카테고리");
+            
+            categoryAll.add(categorycom);
+            categorycom.add(new Product(name, price, image, quantity, explanation, trandingarea, status));
+            
+            categoryAll.print(); // 텍스트파일에 저장
+            JOptionPane.showMessageDialog(null, "등록이 완료 되었습니다.");
+            
+            MainMenu mainmenu = new MainMenu();
+            mainmenu.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_appointment_buttonActionPerformed
 
     private void price_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_price_productActionPerformed
@@ -392,7 +393,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
 
         String selectedFile = fileChooser.getSelectedFile().toString(); // 파일 경로
         imageroute.setText("" + selectedFile);
-        
     }//GEN-LAST:event_filechooser_buttonActionPerformed
 
     private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed
@@ -401,9 +401,9 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_Back_ButtonActionPerformed
 
-    private void kategorie_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorie_productActionPerformed
+    private void category_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_category_productActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_kategorie_productActionPerformed
+    }//GEN-LAST:event_category_productActionPerformed
 
     private void almostnew_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_almostnew_radioActionPerformed
         // TODO add your handling code here:^
@@ -452,6 +452,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private javax.swing.JButton Back_Button;
     private javax.swing.JRadioButton almostnew_radio;
     private javax.swing.JButton appointment_button;
+    public static javax.swing.JComboBox<String> category_product;
     private javax.swing.JTextField explanation_product;
     private javax.swing.JButton filechooser_button;
     private javax.swing.JLabel imageroute;
@@ -466,7 +467,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    public static javax.swing.JComboBox<String> kategorie_product;
     private javax.swing.JTextField name_product;
     private javax.swing.JTextField price_product;
     private javax.swing.JTextField quantity_product;

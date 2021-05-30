@@ -5,7 +5,6 @@
  */
 package deu.cse.team.product_registration;
 
-import deu.cse.team.product_registration.CategoryComponent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -51,5 +50,5 @@ public class Category_composite extends CategoryComponent {
             CategoryComponent component = iterator.next();
             component.print();
         } 
-     }
+    }
 }

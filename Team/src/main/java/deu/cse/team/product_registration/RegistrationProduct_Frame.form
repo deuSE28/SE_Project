@@ -57,7 +57,7 @@
                               <Component id="name_product" alignment="0" max="32767" attributes="0"/>
                               <Component id="quantity_product" alignment="0" max="32767" attributes="0"/>
                               <Component id="price_product" alignment="0" max="32767" attributes="0"/>
-                              <Component id="kategorie_product" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
+                              <Component id="category_product" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
                               <Component id="explanation_product" min="-2" pref="180" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="trandingarea_product" max="32767" attributes="0"/>
@@ -102,7 +102,7 @@
                       <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="kategorie_product" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="category_product" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -203,7 +203,7 @@
         <Property name="text" type="java.lang.String" value="&#xce74;&#xd14c;&#xace0;&#xb9ac; :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="kategorie_product">
+    <Component class="javax.swing.JComboBox" name="category_product">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="12" style="0"/>
@@ -215,7 +215,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="kategorie_productActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="category_productActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

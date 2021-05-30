@@ -5,7 +5,6 @@
  */
 package deu.cse.team.product_registration;
 
-import deu.cse.team.product_registration.CategoryComponent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -38,7 +37,6 @@ public class Product extends CategoryComponent{
     public String getName() {
         return name;
     }
- 
     public String getPrice() {
         return price;
     }
