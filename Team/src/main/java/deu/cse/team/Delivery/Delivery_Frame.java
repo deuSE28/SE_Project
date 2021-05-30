@@ -4,12 +4,19 @@
  * and open the template in the editor.
  */
 package deu.cse.team.Delivery;
-import deu.cse.team.Delivery.product_delivery_test;
 import deu.cse.team.mainmenu.MainMenu;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
+import javax.swing.DefaultListModel;
 /**
  *
  * @author qjqmf
  */
+
 public class Delivery_Frame extends javax.swing.JFrame {
 
     /**
@@ -17,12 +24,79 @@ public class Delivery_Frame extends javax.swing.JFrame {
      */
     public Delivery_Frame() {
         initComponents();
-        String [] delivery = {"출고 준비중", "출고완료", "배달중", "배달완료"};
-        product_delivery pd_d = new product_delivery();
-        pd_d.deliveryproduct();
-        delivery_List.setListData(delivery);
+        deliveryLog();
+        setTitle("Delivery Page");
     }
-
+    
+    public void deliveryLog() {
+        WareHouse warehouse = new WareHouse();
+        Iterator<String> iterator = warehouse.createIterator();
+        
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        delivery_List.setModel(listModel);
+        
+        Thread updater = new Thread(){
+            @Override
+            public void run(){
+                while (iterator.hasNext()) {
+                    String element = iterator.next();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e){
+                        System.out.println(e.getMessage());
+                    }
+                    listModel.addElement(element);
+                }
+            }
+        };
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("C:\\DB\\DeliveryLog.txt"));
+            String user = br.readLine();
+            int to;
+            if(user!=null) {
+                to = Integer.parseInt(user);
+                switch(to){
+                    case 1:
+                        listModel.addElement("출고 준비중");
+                        warehouse.add("출고 완료");
+                        warehouse.add("배송 준비중");
+                        warehouse.add("배송 완료");
+                        break;
+                    case 2:
+                        listModel.addElement("출고 준비중");
+                        listModel.addElement("출고 완료");
+                        warehouse.add("배송 준비중");
+                        warehouse.add("배송 완료");
+                        break;
+                    case 3:
+                        listModel.addElement("출고 준비중");
+                        listModel.addElement("출고 완료");
+                        listModel.addElement("배송 준비중");
+                        warehouse.add("배송 완료");
+                        break;
+                    case 4:
+                        listModel.addElement("출고 준비중");
+                        listModel.addElement("출고 완료");
+                        listModel.addElement("배송 준비중");
+                        listModel.addElement("배송 완료");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else {
+                warehouse.add("출고 준비중");
+                warehouse.add("출고 완료");
+                warehouse.add("배송 준비중");
+                warehouse.add("배송 완료");
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println("오류발생");
+        }
+        updater.start();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,34 +130,40 @@ public class Delivery_Frame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Back_Button)
-                        .addContainerGap())))
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Back_Button)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Back_Button)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed
+        int log = delivery_List.getModel().getSize();
+        String log_str = Integer.toString(log);
+        try {
+            File f1 = new File("C:\\DB\\DeliveryLog.txt");
+            FileWriter writer = new FileWriter(f1);
+            writer.write(log_str);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("오류발생");
+        }
+        
         MainMenu mm = new MainMenu();
         mm.setVisible(true);
         dispose();
