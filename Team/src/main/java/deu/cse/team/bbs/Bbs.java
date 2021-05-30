@@ -113,15 +113,16 @@ public class Bbs extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Split> list = ListPost();
         JLabel imageLabel;
+        DataCheck dataCheck = new DataCheck();
         jTable1.getColumn("썸네일").setCellRenderer(new myTableCellRanderer());
         for(int i=0; i<list.size(); i++) {      
-            if (nameCheck(list.get(i).name))
+            if (dataCheck.nameCheck(list.get(i).name))
                 continue;
-            else if (categoryCheck(list.get(i).category))
+            else if (dataCheck.categoryCheck(list.get(i).category))
                 continue;
-            else if (priceCheck(list.get(i).price))
+            else if (dataCheck.priceCheck(list.get(i).price))
                 continue;
-            else if (locationCheck(list.get(i).location))
+            else if (dataCheck.locationCheck(list.get(i).location))
                 continue;
             else {
             imageLabel = new JLabel();
@@ -141,32 +142,33 @@ public class Bbs extends javax.swing.JFrame {
             }
         }
     }
-    public boolean nameCheck(String Dname) {
-        String Sname = nameTextField.getText();
-        if (Sname.equals("") || Dname.equals(Sname)) {
-            return false;
-        } else return true;
+    private class DataCheck {
+        public boolean nameCheck(String Dname) {
+            String Sname = nameTextField.getText();
+            if (Sname.equals("") || Dname.equals(Sname)) {
+                return false;
+            } else return true;
+        }
+        public boolean categoryCheck(String Dcategory) {
+            String Scategory = kategorie_product.getSelectedItem().toString();
+            if (Scategory.equals("--전체--") || Dcategory.equals(Scategory)) {
+                return false;
+            } else return true;
+        }
+        public boolean priceCheck(String Dprice) {
+            String Smin = minPriceTextField.getText();
+            String Smax = maxPriceTextField.getText();
+            if ((Smin.equals("") && Smax.equals("")) || ((Integer.parseInt(Smin) <= Integer.parseInt(Dprice)) && (Integer.parseInt(Dprice) <= Integer.parseInt(Smax)))) {
+                return false;
+            } else return true;
+        }
+        public boolean locationCheck(String Dlocation) {
+            String Slocation = locationComboBox.getSelectedItem().toString();
+            if (Slocation.equals("없음") || Dlocation.equals(Slocation)) {
+                return false;
+            } else return true;
+        }
     }
-    public boolean categoryCheck(String Dname) {
-        String Scategory = kategorie_product.getSelectedItem().toString();
-        if (Scategory.equals("--전체--") || Dname.equals(Scategory)) {
-            return false;
-        } else return true;
-    }
-    public boolean priceCheck(String Dname) {
-        String Smin = minPriceTextField.getText();
-        String Smax = maxPriceTextField.getText();
-        if ((Smin.equals("") && Smax.equals("")) || ((Integer.parseInt(Smin) <= Integer.parseInt(Dname)) && (Integer.parseInt(Dname) <= Integer.parseInt(Smax)))) {
-            return false;
-        } else return true;
-    }
-    public boolean locationCheck(String Dname) {
-        String Slocation = locationComboBox.getSelectedItem().toString();
-        if (Slocation.equals("없음") || Dname.equals(Slocation)) {
-            return false;
-        } else return true;
-    }
- 
     class myTableCellRanderer implements TableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table,
