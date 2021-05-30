@@ -6,6 +6,7 @@
 package deu.cse.team.mainmenu;
 
 import deu.cse.team.Delivery.Delivery_Frame;
+import deu.cse.team.bbs.Bbs;
 import deu.cse.team.product_registration.RegistrationProduct_Frame;
 import deu.cse.team.login.Login;
 
@@ -101,6 +102,8 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void ProductSearch_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductSearch_ButtonActionPerformed
         // TODO add your handling code here:
+        Bbs bbs = new Bbs();
+        bbs.setVisible(true);
     }//GEN-LAST:event_ProductSearch_ButtonActionPerformed
 
     private void RegistrationProduct_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrationProduct_ButtonActionPerformed
@@ -112,6 +115,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void Delivery_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delivery_ButtonActionPerformed
         Delivery_Frame DF = new Delivery_Frame();
         DF.setVisible(true);
+        DF.
         dispose();
     }//GEN-LAST:event_Delivery_ButtonActionPerformed
 
