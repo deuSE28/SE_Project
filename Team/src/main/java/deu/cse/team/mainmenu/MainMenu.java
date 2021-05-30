@@ -116,6 +116,7 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         Bbs bbs = new Bbs();
         bbs.setVisible(true);
+        dispose();
     }//GEN-LAST:event_ProductSearch_ButtonActionPerformed
 
     private void RegistrationProduct_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrationProduct_ButtonActionPerformed
