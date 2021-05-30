@@ -6,9 +6,7 @@
 package deu.cse.team.user_management;
 
 import deu.cse.team.mainmenu.AdminMenu;
-import deu.cse.team.source.Check_BlackList;
-import deu.cse.team.source.SignUpdataInfo;
-import deu.cse.team.source.SignUp;
+import deu.cse.team.source.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,8 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class User_Management extends javax.swing.JFrame {
 
-    ArrayList<SignUpdataInfo> Userinfo = new ArrayList<>();
-    ArrayList<SignUpdataInfo> Blackinfo = new ArrayList<>();
+    ArrayList<UserInfo> userinfo = new ArrayList<>();
+    ArrayList<UserInfo> blackinfo = new ArrayList<>();
     /**
      * Creates new form User_Management
      */
@@ -219,7 +217,8 @@ public class User_Management extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Load_UserList_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Load_UserList_ButtonActionPerformed
-        SignUp Userdata = new SignUp();
+        UserList Userdata = new UserList();
+        
         
         DefaultTableModel usermodel = (DefaultTableModel) User_Table.getModel();
         usermodel.setNumRows(0);
@@ -228,48 +227,48 @@ public class User_Management extends javax.swing.JFrame {
         Userdata.Split();
         
         try {
-            Userinfo = Userdata.returnSignUpInfo();
+            userinfo = Userdata.returUserinfo();
         } catch (IOException ex) {
             Logger.getLogger(User_Management.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        for (int i = 0 ; i < Userinfo.size() ; i++){
+        for (int i = 0 ; i < userinfo.size() ; i++){
             usermodel.insertRow(usermodel.getRowCount(), new Object[]{
-                Userinfo.get(i).getId(),
-                Userinfo.get(i).getPw(),
-                Userinfo.get(i).getName(),
-                Userinfo.get(i).getEmail(),
-                Userinfo.get(i).getPhonenum(),
-                Userinfo.get(i).getBirth(),
-                Userinfo.get(i).getResidence()
+                userinfo.get(i).getId(),
+                userinfo.get(i).getPw(),
+                userinfo.get(i).getName(),
+                userinfo.get(i).getEmail(),
+                userinfo.get(i).getPhone(),
+                userinfo.get(i).getBirth(),
+                userinfo.get(i).getResidence()
             });
         }
     }//GEN-LAST:event_Load_UserList_ButtonActionPerformed
 
     private void Load_BlackKList_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Load_BlackKList_ButtonActionPerformed
-        Check_BlackList Blackdata = new Check_BlackList();
+        UserList Blackdata = new UserList();
         
         DefaultTableModel blackmodel = (DefaultTableModel) Black_Table.getModel();
         blackmodel.setNumRows(0);
         
-        Blackdata.FRead();
-        Blackdata.Split();
+        Blackdata.BRead();
+        Blackdata.BSplit();
         
         try {
-            Blackinfo = Blackdata.returnBlackListInfo();
+            blackinfo = Blackdata.returnBlackinfo();
         } catch (IOException ex) {
             Logger.getLogger(User_Management.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        for (int i = 0 ; i < Blackinfo.size() ; i++){
+        for (int i = 0 ; i < blackinfo.size() ; i++){
             blackmodel.insertRow(blackmodel.getRowCount(), new Object[]{
-                Blackinfo.get(i).getId(),
-                Blackinfo.get(i).getPw(),
-                Blackinfo.get(i).getName(),
-                Blackinfo.get(i).getEmail(),
-                Blackinfo.get(i).getPhonenum(),
-                Blackinfo.get(i).getBirth(),
-                Blackinfo.get(i).getResidence()
+                blackinfo.get(i).getId(),
+                blackinfo.get(i).getPw(),
+                blackinfo.get(i).getName(),
+                blackinfo.get(i).getEmail(),
+                blackinfo.get(i).getPhone(),
+                blackinfo.get(i).getBirth(),
+                blackinfo.get(i).getResidence()
             });
         }
     }//GEN-LAST:event_Load_BlackKList_ButtonActionPerformed
@@ -310,24 +309,24 @@ public class User_Management extends javax.swing.JFrame {
                 birth = Birth.toString();
                 residence = Residence.toString();
                 
-                Check_BlackList Blackdata = new Check_BlackList();
+                UserList Blackdata = new UserList();
                 Blackdata.FWrite(id+"\t"+pw+"\t"+name+"\t"+email+"\t"+phone+"\t"+birth+"\t"+residence);
             }
             
-            SignUp Userdata = new SignUp();
+            UserList Userdata = new UserList();
             Userdata.FRead();
             Userdata.Split();
             
-            Userinfo = Userdata.returnSignUpInfo();
+            userinfo = Userdata.returUserinfo();
             
-            for (int i = 0 ; i < Userinfo.size() ; i++){
-                if (Userinfo.get(i).getId().equals(id)){
-                    Userinfo.remove(i);
+            for (int i = 0 ; i < userinfo.size() ; i++){
+                if (userinfo.get(i).getId().equals(id)){
+                    userinfo.remove(i);
                 }
                 BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\userList.txt", false));
                 log.close();
-                for (int j = 0; j < Userinfo.size(); j++) {
-                    String str = Userinfo.get(j).getId() + "\t" + Userinfo.get(j).getPw() + "\t" + Userinfo.get(j).getName() + "\t" + Userinfo.get(j).getEmail() + "\t" + Userinfo.get(j).getPhonenum() + "\t" + Userinfo.get(j).getBirth() + "\t" + Userinfo.get(j).getResidence();
+                for (int j = 0; j < userinfo.size(); j++) {
+                    String str = userinfo.get(j).getId() + "\t" + userinfo.get(j).getPw() + "\t" + userinfo.get(j).getName() + "\t" + userinfo.get(j).getEmail() + "\t" + userinfo.get(j).getPhone() + "\t" + userinfo.get(j).getBirth() + "\t" + userinfo.get(j).getResidence();
                     Userdata.FWrite(str);
                 }
                 JOptionPane.showMessageDialog(null, "블랙리스트에 추가되었습니다.");
@@ -373,24 +372,24 @@ public class User_Management extends javax.swing.JFrame {
                 birth = Birth.toString();
                 residence = Residence.toString();
                 
-                SignUp Userdata = new SignUp();
+                UserList Userdata = new UserList();
                 Userdata.FWrite(id+"\t"+pw+"\t"+name+"\t"+email+"\t"+phone+"\t"+birth+"\t"+residence);
             }
             
-            Check_BlackList Blackdata = new Check_BlackList();
-            Blackdata.FRead();
-            Blackdata.Split();
+            UserList Blackdata = new UserList();
+            Blackdata.BRead();
+            Blackdata.BSplit();
             
-            Blackinfo = Blackdata.returnBlackListInfo();
+            blackinfo = Blackdata.returnBlackinfo();
             
-            for (int i = 0 ; i < Blackinfo.size() ; i++){
-                if (Blackinfo.get(i).getId().equals(id)){
-                    Blackinfo.remove(i);
+            for (int i = 0 ; i < blackinfo.size() ; i++){
+                if (blackinfo.get(i).getId().equals(id)){
+                    blackinfo.remove(i);
                 }
                 BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\blackList.txt", false));
                 log.close();
-                for (int j = 0; j < Blackinfo.size(); j++) {
-                    String str = Blackinfo.get(j).getId() + "\t" + Blackinfo.get(j).getPw() + "\t" + Blackinfo.get(j).getName() + "\t" + Blackinfo.get(j).getEmail() + "\t" + Blackinfo.get(j).getPhonenum() + "\t" + Blackinfo.get(j).getBirth() + "\t" + Blackinfo.get(j).getResidence();
+                for (int j = 0; j < blackinfo.size(); j++) {
+                    String str = blackinfo.get(j).getId() + "\t" + blackinfo.get(j).getPw() + "\t" + blackinfo.get(j).getName() + "\t" + blackinfo.get(j).getEmail() + "\t" + blackinfo.get(j).getPhone() + "\t" + blackinfo.get(j).getBirth() + "\t" + blackinfo.get(j).getResidence();
                     Blackdata.FWrite(str);
                 }
                 JOptionPane.showMessageDialog(null, "블랙리스트가 해제되었습니다.");
