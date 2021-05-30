@@ -5,12 +5,9 @@
  */
 package deu.cse.team.login;
 
-import deu.cse.team.source.Login_Source;
-import deu.cse.team.source.LogindataInfo;
+import deu.cse.team.source.*;
 import deu.cse.team.mainmenu.*;
-import deu.cse.team.source.Check_BlackList;
-import deu.cse.team.source.SignUp;
-import deu.cse.team.source.SignUpdataInfo;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,11 +21,10 @@ import javax.swing.JOptionPane;
  * @author BON
  */
 public class Login extends javax.swing.JFrame {
-    ArrayList<LogindataInfo> logininfo = new ArrayList<>();
-    ArrayList<SignUpdataInfo> signupinfo = new ArrayList<>();
-    ArrayList<SignUpdataInfo> blacklistinfo = new ArrayList<>();
-    Boolean a, black;
-    
+    ArrayList<UserInfo> userinfo = new ArrayList<>();
+    ArrayList<AdminInfo> admininfo = new ArrayList<>();
+    ArrayList<UserInfo> blackinfo = new ArrayList<>();
+    boolean admin, success, check, black;
     /**
      * Creates new form NewJFrame
      */
@@ -339,21 +335,22 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_SignUp_ButtonActionPerformed
 
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
-        Login_Source lg = new Login_Source();
-        lg.FRead();
-        lg.Split();
-        
-        Check_BlackList cb = new Check_BlackList();
-        cb.FRead();
-        cb.Split();
+        UserList ul = new UserList();
+        ul.FRead();
+        ul.ARead();
+        ul.Split();
+        ul.ASplit();
+        ul.BRead();
+        ul.BSplit();
         
         try{
-            logininfo = lg.returnLogininfo();
-            blacklistinfo = cb.returnBlackListInfo();
+            blackinfo = ul.returnBlackinfo();
+            userinfo = ul.returUserinfo();
+            admininfo = ul.returAdmininfo();
         } catch (IOException ex){
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
         String time = format1.format(new Date());
         
@@ -362,72 +359,62 @@ public class Login extends javax.swing.JFrame {
 
         id = ID_Field.getText();
         pw = PW_Field.getText();
-
-        a = false;
-        black = true;
         
-        for (int i = 0; i < logininfo.size(); i++) {
-            if (logininfo.get(i).getId().equals(id) && logininfo.get(i).getPw().equals(pw)) {
-                if (i == 0) {
+        admin = id.equals("admin");
+        success = false;
+        black = false;
+        if (admin) {
+            for (int i = 0 ; i < admininfo.size() ; i++){
+                if (admininfo.get(i).getId().equals(id) && admininfo.get(i).getPw().equals(pw)){
                     JOptionPane.showMessageDialog(null, "관리자 로그인 성공");
                     try {
-                        lg.FWrite(id);
+                        ul.UWrite(id);
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    AdminMenu next = new AdminMenu();
-                    next.setVisible(true);
+                    AdminMenu am = new AdminMenu();
+                    am.setVisible(true);
                     dispose();
-                    a = true;
+                    success = true;;
                     break;
-                } else {
-                    JOptionPane.showMessageDialog(null, "로그인 성공");
+                }
+            }
+            if (!success){
+                JOptionPane.showMessageDialog(null, "로그인 실패");
+            }
+        } else {
+            for (int i = 0; i < userinfo.size(); i++) {
+                if (userinfo.get(i).getId().equals(id) && userinfo.get(i).getPw().equals(pw)) {
+                    JOptionPane.showMessageDialog(null, userinfo.get(i).getName()+"님 로그인하셨습니다.");
                     try {
-                        lg.FWrite(id);
-                        lg.LWrite(id+"\t"+pw+"\t"+time);
+                        ul.UWrite(id);
+                        ul.LWrite(id+"\t"+time);
                     } catch (IOException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
                     MainMenu next = new MainMenu();
                     next.setVisible(true);
                     dispose();
-                    a = true;
-                    break;
+                    success = true;;
+                    break;    
                 }
             }
-        }
-        if (a == false) {
-            for(int i = 0; i < blacklistinfo.size(); i++){
-                if (blacklistinfo.get(i).getId().equals(id) && blacklistinfo.get(i).getPw().equals(pw)){
-                    black = false;
-                    break;
-                }
-            }            
-            if(black == true){
+            if (!success){
                 JOptionPane.showMessageDialog(null, "로그인 실패");
-            } else {
-                JOptionPane.showMessageDialog(null, "차단된 회원입니다.");
             }
         }
+            
+        
+
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
     private void SingUp_Check_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SingUp_Check_ButtonActionPerformed
-        SignUp create = new SignUp();
-        create.FRead();
-        create.Split();
-        
-        Check_BlackList cb = new Check_BlackList();
-        cb.FRead();
-        cb.Split();
-        
-        try {
-            blacklistinfo = cb.returnBlackListInfo();
-            signupinfo = create.returnSignUpInfo();
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        UserInfoBuilder userInfoBuilder = new UserInfoBuilder();
+        UserList ul = new UserList();
+        ul.FRead();
+        ul.Split();
+        ul.BRead();
+        ul.BSplit();
         
         String sid = idTextField.getText();
         String spw = pwPasswordField.getText();
@@ -437,22 +424,27 @@ public class Login extends javax.swing.JFrame {
         String sbirth = birthTextField.getText();
         String sresidence = residenceComboBox.getSelectedItem().toString();
         
-        String b = sid+"\t"+spw+"\t"+ sname+"\t"+ semail+"\t"+ sphone+"\t"+ sbirth+"\t"+ sresidence;
+        check = true;
         black = false;
+        try {
+            blackinfo = ul.returnBlackinfo();
+            userinfo = ul.returUserinfo();
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        int count = 1;
-        for (int j = 0; j < signupinfo.size(); j++) {
-            if (signupinfo.get(j).getId().equals(sid)) {
+        for(int i = 0 ; i < userinfo.size() ; i++){
+            if (userinfo.get(i).getId().equals(idTextField.getText())){
                 JOptionPane.showMessageDialog(null, "중복아이디입니다.");
                 idTextField.setText("");
-                count = 0;
+                check = false;
                 break;
             }
         }
-        try {
-            if (!"".equals(sid) && !"".equals(spw) && !"".equals(sname) && !"".equals(sphone)) {
-                for (int i = 0 ; i < blacklistinfo.size() ; i++) {
-                    if (blacklistinfo.get(i).getName().equals(sname) && blacklistinfo.get(i).getPhonenum().equals(sphone)){
+        if (check){
+            if (!"".equals(sid) && !"".equals(spw) && !"".equals(sname) && !"".equals(sphone) && !"".equals(semail) && !"".equals(sbirth) && !"".equals(sresidence)){
+                for (int i = 0 ;  i < blackinfo.size() ; i++){
+                    if (blackinfo.get(i).getName().equals(sname) && blackinfo.get(i).getPhone().equals(sphone)){
                         black = true;
                         break;
                     }
@@ -467,7 +459,7 @@ public class Login extends javax.swing.JFrame {
                     emailTextField.setText("");
                     birthTextField.setText("");                        
                     SignUp.dispose();
-                } else{
+                } else {
                     if (!spw.equals(pwcheckPasswordField.getText())){
                         JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다\n 다시입력해주세요.");
                         pwPasswordField.setText("");
@@ -476,8 +468,17 @@ public class Login extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "사용불가능한 아이디입니다.");
                         idTextField.setText("");
                     } else{
-                        if (count == 1) {
-                            create.FWrite(b);
+                        UserInfo result = userInfoBuilder
+                            .setId(idTextField.getText())
+                            .setPw(pwPasswordField.getText())
+                            .setName(nameTextField.getText())
+                            .setEmail(emailTextField.getText())
+                            .setPhone(phoneTextField.getText())
+                            .setBirth(birthTextField.getText())
+                            .setResidence(residenceComboBox.getSelectedItem().toString())
+                            .build();
+                        try {
+                            ul.FWrite(result.getUserInfo());
                             JOptionPane.showMessageDialog(null, "회원 가입 완료");
                             idTextField.setText("");
                             pwPasswordField.setText("");
@@ -487,17 +488,17 @@ public class Login extends javax.swing.JFrame {
                             emailTextField.setText("");
                             birthTextField.setText("");                        
                             SignUp.dispose();
-                        } else {
-                            JOptionPane.showMessageDialog(null, "아이디를 다시 입력해주세요.");
+                        } catch (IOException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }
-            } else {
+            } else{
                 JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+                
+                
     }//GEN-LAST:event_SingUp_Check_ButtonActionPerformed
 
     private void residenceComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residenceComboBoxActionPerformed
