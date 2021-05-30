@@ -127,7 +127,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void Delivery_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delivery_ButtonActionPerformed
         Delivery_Frame DF = new Delivery_Frame();
         DF.setVisible(true);
-        DF.dispose();
+        dispose();
     }//GEN-LAST:event_Delivery_ButtonActionPerformed
 
     private void LogOut_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOut_buttonActionPerformed

@@ -5,6 +5,7 @@
  */
 package deu.cse.team.bbs;
 
+import deu.cse.team.Delivery.Delivery_Frame;
 import deu.cse.team.mainmenu.MainMenu;
 import java.awt.Component;
 import java.awt.Image;
@@ -667,7 +668,10 @@ public class Bbs extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        Delivery_Frame DF = new Delivery_Frame();
+        DF.setVisible(true);
         productInfo.dispose();
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
