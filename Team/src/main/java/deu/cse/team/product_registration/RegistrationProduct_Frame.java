@@ -23,8 +23,9 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Product Registration Page");
         cmbList();
+        unopened_radio.setSelected(true);
     }
-    
+   
     // 콤보박스에 카테고리를 불러옴
     public void cmbList() {
         DefaultComboBoxModel model = new DefaultComboBoxModel<>();
@@ -241,20 +242,22 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                                     .addGap(78, 78, 78)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(filechooser_button)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(imageroute, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
             .addGroup(layout.createSequentialGroup()
-                .addGap(173, 173, 173)
-                .addComponent(appointment_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Back_Button)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(appointment_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Back_Button)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -282,8 +285,8 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(filechooser_button)
-                        .addComponent(imageroute, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11)))
+                        .addComponent(jLabel11))
+                    .addComponent(imageroute, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -328,25 +331,36 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         String image = imageroute.getText();
         String quantity = quantity_product.getText();
         String explanation = explanation_product.getText();
+        if(unopened_radio.isSelected()){
+             unopened_radio.setActionCommand("미개봉");
+        }
         String trandingarea = trandingarea_product.getSelectedItem().toString();
         String status = statusButtonGroup.getSelection().getActionCommand();
+        boolean check = true;
         
-        try {
-            File f1 = new File("C:\\DB\\RegistrationProduct.txt");
-            FileWriter writer = new FileWriter(f1, true);
-            writer.write(name + "\t" + kategorie + "\t" + price + "\t" + image + "\t" + quantity + "\t" + explanation + "\t" + trandingarea + "\t" + status + "\n");
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("오류발생");
-        }
         
-        if ((name.length() == 0) || (price.length() == 0) || (quantity.length() == 0)
-                || (explanation.length() == 0)) {
+        if(image.length()==0 || (name.length() == 0) || (price.length() == 0) || (quantity.length() == 0) || (explanation.length() == 0)){
+            check=false;
             JOptionPane.showMessageDialog(null, "정보를 입력해주세요.");
         }
-        else {
-            JOptionPane.showMessageDialog(null, "등록이 완료 되었습니다."); // 메시지 창
+       if(image.length()!=0 && name.length() != 0 && price.length() != 0 && quantity.length() != 0 && explanation.length() != 0) {
+            check=true;
+        }
+       
+        // 모든 정보를 입력했을 때
+       if(check==true){ 
+            CategoryComponent category = new Category_composite(kategorie);
+            CategoryComponent categoryAll = new Category_composite("카테고리");
+            
+            categoryAll.add(category);
+            category.add(new Product(name, price, image, quantity, explanation, trandingarea, status));
+            
+            categoryAll.print(); // 텍스트파일에 저장
+            JOptionPane.showMessageDialog(null, "등록이 완료 되었습니다.");
+            
+            MainMenu mainmenu = new MainMenu();
+            mainmenu.setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_appointment_buttonActionPerformed
 
@@ -379,7 +393,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
 
         String selectedFile = fileChooser.getSelectedFile().toString(); // 파일 경로
         imageroute.setText("" + selectedFile);
-        
     }//GEN-LAST:event_filechooser_buttonActionPerformed
 
     private void Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_ButtonActionPerformed
@@ -393,7 +406,7 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_kategorie_productActionPerformed
 
     private void almostnew_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_almostnew_radioActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:^
         almostnew_radio.setActionCommand("거의새것");
     }//GEN-LAST:event_almostnew_radioActionPerformed
 
