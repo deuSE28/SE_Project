@@ -6,6 +6,8 @@
 package deu.cse.team.mainmenu;
 
 import deu.cse.team.category.*;
+import deu.cse.team.login.Login;
+import deu.cse.team.notice.Write_Notice;
 import deu.cse.team.user_management.*;
 /**
  *
@@ -31,6 +33,8 @@ public class AdminMenu extends javax.swing.JFrame {
 
         Set_Category_Button = new javax.swing.JButton();
         User_Management_Button = new javax.swing.JButton();
+        Notice_Button = new javax.swing.JButton();
+        LogOut_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,25 +52,48 @@ public class AdminMenu extends javax.swing.JFrame {
             }
         });
 
+        Notice_Button.setText("공지사항 작성");
+        Notice_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Notice_ButtonActionPerformed(evt);
+            }
+        });
+
+        LogOut_Button.setText("로그아웃");
+        LogOut_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogOut_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
+                .addGap(142, 142, 142)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(Set_Category_Button)
-                    .addComponent(User_Management_Button))
-                .addContainerGap(145, Short.MAX_VALUE))
+                    .addComponent(Set_Category_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                    .addComponent(User_Management_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Notice_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LogOut_Button)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
+                .addGap(72, 72, 72)
+                .addComponent(Notice_Button)
+                .addGap(39, 39, 39)
                 .addComponent(Set_Category_Button)
                 .addGap(40, 40, 40)
                 .addComponent(User_Management_Button)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(LogOut_Button)
+                .addContainerGap())
         );
 
         pack();
@@ -83,6 +110,18 @@ public class AdminMenu extends javax.swing.JFrame {
         um.setVisible(true);
         dispose();
     }//GEN-LAST:event_User_Management_ButtonActionPerformed
+
+    private void Notice_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Notice_ButtonActionPerformed
+        Write_Notice wn = new Write_Notice();
+        wn.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_Notice_ButtonActionPerformed
+
+    private void LogOut_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOut_ButtonActionPerformed
+        Login lg = new Login();
+        lg.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_LogOut_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,6 +159,8 @@ public class AdminMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LogOut_Button;
+    private javax.swing.JButton Notice_Button;
     private javax.swing.JButton Set_Category_Button;
     private javax.swing.JButton User_Management_Button;
     // End of variables declaration//GEN-END:variables

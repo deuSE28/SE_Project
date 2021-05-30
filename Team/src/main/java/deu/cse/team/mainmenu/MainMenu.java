@@ -9,6 +9,7 @@ import deu.cse.team.Delivery.Delivery_Frame;
 import deu.cse.team.bbs.Bbs;
 import deu.cse.team.product_registration.RegistrationProduct_Frame;
 import deu.cse.team.login.Login;
+import deu.cse.team.notice.Show_Notice;
 
 /**
  *
@@ -36,6 +37,7 @@ public class MainMenu extends javax.swing.JFrame {
         ProductSearch_Button = new javax.swing.JButton();
         Delivery_Button = new javax.swing.JButton();
         LogOut_button = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,21 +69,29 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("공지사항");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(296, Short.MAX_VALUE)
+                .addComponent(LogOut_button)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(166, Short.MAX_VALUE)
+                .addGap(153, 153, 153)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
                     .addComponent(Delivery_Button)
                     .addComponent(RegistrationProduct_Button)
                     .addComponent(ProductSearch_Button))
-                .addContainerGap(167, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LogOut_button)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +102,9 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(ProductSearch_Button)
                 .addGap(18, 18, 18)
                 .addComponent(Delivery_Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(LogOut_button)
                 .addContainerGap())
         );
@@ -115,8 +127,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void Delivery_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delivery_ButtonActionPerformed
         Delivery_Frame DF = new Delivery_Frame();
         DF.setVisible(true);
-        DF.
-        dispose();
+        DF.dispose();
     }//GEN-LAST:event_Delivery_ButtonActionPerformed
 
     private void LogOut_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOut_buttonActionPerformed
@@ -124,6 +135,12 @@ public class MainMenu extends javax.swing.JFrame {
         lg.setVisible(true);
         dispose();
     }//GEN-LAST:event_LogOut_buttonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Show_Notice sn = new Show_Notice();
+        sn.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,5 +183,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton LogOut_button;
     private javax.swing.JButton ProductSearch_Button;
     private javax.swing.JButton RegistrationProduct_Button;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
