@@ -113,10 +113,15 @@ public class Bbs extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Split> list = ListPost();
         JLabel imageLabel;
-        ImageIcon loading = new ImageIcon("C:\\DB\\image\\loading.png");
         jTable1.getColumn("썸네일").setCellRenderer(new myTableCellRanderer());
         for(int i=0; i<list.size(); i++) {      
             if (nameCheck(list.get(i).name))
+                continue;
+            else if (categoryCheck(list.get(i).category))
+                continue;
+            else if (priceCheck(list.get(i).price))
+                continue;
+            else if (locationCheck(list.get(i).location))
                 continue;
             else {
             imageLabel = new JLabel();
@@ -138,11 +143,30 @@ public class Bbs extends javax.swing.JFrame {
     }
     public boolean nameCheck(String Dname) {
         String Sname = nameTextField.getText();
-        if (nameTextField.getText().equals("") || Dname.equals(nameTextField.getText())) {
+        if (Sname.equals("") || Dname.equals(Sname)) {
             return false;
         } else return true;
     }
-  
+    public boolean categoryCheck(String Dname) {
+        String Scategory = kategorie_product.getSelectedItem().toString();
+        if (Scategory.equals("--전체--") || Dname.equals(Scategory)) {
+            return false;
+        } else return true;
+    }
+    public boolean priceCheck(String Dname) {
+        String Smin = minPriceTextField.getText();
+        String Smax = maxPriceTextField.getText();
+        if ((Smin.equals("") && Smax.equals("")) || ((Integer.parseInt(Smin) <= Integer.parseInt(Dname)) && (Integer.parseInt(Dname) <= Integer.parseInt(Smax)))) {
+            return false;
+        } else return true;
+    }
+    public boolean locationCheck(String Dname) {
+        String Slocation = locationComboBox.getSelectedItem().toString();
+        if (Slocation.equals("없음") || Dname.equals(Slocation)) {
+            return false;
+        } else return true;
+    }
+ 
     class myTableCellRanderer implements TableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table,
@@ -205,6 +229,7 @@ public class Bbs extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -333,6 +358,8 @@ public class Bbs extends javax.swing.JFrame {
 
         jLabel10.setText("거래지역 :");
 
+        kategorie_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--전체--" }));
+
         jLabel11.setText("~");
 
         locationComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "없음", "서울특별시", "부산광역시", "대구광역시", "인천광역시", "광주광역시", "대전광역시", "울산광역시", "세종특별자치시", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도" }));
@@ -399,8 +426,7 @@ public class Bbs extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel11)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(maxPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(maxPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(searchLayout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(searchButton)
@@ -435,7 +461,7 @@ public class Bbs extends javax.swing.JFrame {
                     .addComponent(locationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchButton)
                     .addComponent(cancelButton))
@@ -494,6 +520,13 @@ public class Bbs extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -501,8 +534,13 @@ public class Bbs extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,7 +549,9 @@ public class Bbs extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addContainerGap())
         );
 
         pack();
@@ -596,6 +636,11 @@ public class Bbs extends javax.swing.JFrame {
         locationComboBox.setSelectedItem(restoredData[4]);
     }//GEN-LAST:event_logTableMouseClicked
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -639,6 +684,7 @@ public class Bbs extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
