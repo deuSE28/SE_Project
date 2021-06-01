@@ -310,7 +310,7 @@ public class User_Management extends javax.swing.JFrame {
                 residence = Residence.toString();
                 
                 UserList Blackdata = new UserList();
-                Blackdata.FWrite(id+"\t"+pw+"\t"+name+"\t"+email+"\t"+phone+"\t"+birth+"\t"+residence);
+                Blackdata.BWrite(id+"\t"+pw+"\t"+name+"\t"+email+"\t"+phone+"\t"+birth+"\t"+residence);
             }
             
             UserList Userdata = new UserList();
@@ -322,14 +322,16 @@ public class User_Management extends javax.swing.JFrame {
             for (int i = 0 ; i < userinfo.size() ; i++){
                 if (userinfo.get(i).getId().equals(id)){
                     userinfo.remove(i);
+                    BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\userList.txt", false));
+                    log.close();
+                    for (int j = 0; j < userinfo.size(); j++) {
+                        String str = userinfo.get(j).getId() + "\t" + userinfo.get(j).getPw() + "\t" + userinfo.get(j).getName() + "\t" + userinfo.get(j).getEmail() + "\t" + userinfo.get(j).getPhone() + "\t" + userinfo.get(j).getBirth() + "\t" + userinfo.get(j).getResidence();
+                        Userdata.FWrite(str);
+                    }
+                    JOptionPane.showMessageDialog(null, "블랙리스트에 추가되었습니다.");
+                    Load_UserList_Button.doClick();
+                    break;
                 }
-                BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\userList.txt", false));
-                log.close();
-                for (int j = 0; j < userinfo.size(); j++) {
-                    String str = userinfo.get(j).getId() + "\t" + userinfo.get(j).getPw() + "\t" + userinfo.get(j).getName() + "\t" + userinfo.get(j).getEmail() + "\t" + userinfo.get(j).getPhone() + "\t" + userinfo.get(j).getBirth() + "\t" + userinfo.get(j).getResidence();
-                    Userdata.FWrite(str);
-                }
-                JOptionPane.showMessageDialog(null, "블랙리스트에 추가되었습니다.");
             }
         } catch (IOException ex) {
             Logger.getLogger(User_Management.class.getName()).log(Level.SEVERE, null, ex);
@@ -385,14 +387,16 @@ public class User_Management extends javax.swing.JFrame {
             for (int i = 0 ; i < blackinfo.size() ; i++){
                 if (blackinfo.get(i).getId().equals(id)){
                     blackinfo.remove(i);
+                    BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\blackList.txt", false));
+                    log.close();
+                    for (int j = 0; j < blackinfo.size(); j++) {
+                        String str = blackinfo.get(j).getId() + "\t" + blackinfo.get(j).getPw() + "\t" + blackinfo.get(j).getName() + "\t" + blackinfo.get(j).getEmail() + "\t" + blackinfo.get(j).getPhone() + "\t" + blackinfo.get(j).getBirth() + "\t" + blackinfo.get(j).getResidence();
+                        Blackdata.BWrite(str);
+                    }
+                    JOptionPane.showMessageDialog(null, "블랙리스트가 해제되었습니다.");
+                    Load_BlackKList_Button.doClick();
+                    break;
                 }
-                BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\blackList.txt", false));
-                log.close();
-                for (int j = 0; j < blackinfo.size(); j++) {
-                    String str = blackinfo.get(j).getId() + "\t" + blackinfo.get(j).getPw() + "\t" + blackinfo.get(j).getName() + "\t" + blackinfo.get(j).getEmail() + "\t" + blackinfo.get(j).getPhone() + "\t" + blackinfo.get(j).getBirth() + "\t" + blackinfo.get(j).getResidence();
-                    Blackdata.FWrite(str);
-                }
-                JOptionPane.showMessageDialog(null, "블랙리스트가 해제되었습니다.");
             }
         } catch (IOException ex) {
             Logger.getLogger(User_Management.class.getName()).log(Level.SEVERE, null, ex);
