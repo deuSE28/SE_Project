@@ -101,6 +101,13 @@ public class UserList implements FileInterface{
         pw.flush();
         pw.close();
     }
+    public void BWrite(String a) throws IOException {
+        BufferedWriter log = new BufferedWriter(new FileWriter("C:\\DB\\blackList.txt",true));
+        PrintWriter pw = new PrintWriter(log,true);
+        pw.write(a+"\n");
+        pw.flush();
+        pw.close();
+    }
     
     @Override
     public void Split() {
