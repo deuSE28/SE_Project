@@ -383,23 +383,35 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "로그인 실패");
             }
         } else {
-            for (int i = 0; i < userinfo.size(); i++) {
-                if (userinfo.get(i).getId().equals(id) && userinfo.get(i).getPw().equals(pw)) {
-                    JOptionPane.showMessageDialog(null, userinfo.get(i).getName()+"님 로그인하셨습니다.");
-                    try {
-                        ul.UWrite(id);
-                        ul.LWrite(id+"\t"+time);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    MainMenu next = new MainMenu();
-                    next.setVisible(true);
-                    dispose();
-                    success = true;;
-                    break;    
+            for (int j = 0 ; j <blackinfo.size() ; j++){
+                if (blackinfo.get(j).getId().equals(id) && blackinfo.get(j).getPw().equals(pw)){
+                    black = true;
+                    break;
                 }
             }
-            if (!success){
+            if (!black){
+                for (int i = 0; i < userinfo.size(); i++) {
+                        if (userinfo.get(i).getId().equals(id) && userinfo.get(i).getPw().equals(pw)) {
+                            JOptionPane.showMessageDialog(null, userinfo.get(i).getName()+"님 로그인하셨습니다.");
+                            try {
+                                ul.UWrite(id);
+                                ul.LWrite(id+"\t"+time);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            MainMenu next = new MainMenu();
+                            next.setVisible(true);
+                            dispose();
+                            success = true;
+                            break;    
+                        }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "블랙리스트입니다.");
+                ID_Field.setText("");
+                PW_Field.setText("");
+            }
+            if (!success && !black){
                 JOptionPane.showMessageDialog(null, "로그인 실패");
             }
         }
@@ -411,10 +423,6 @@ public class Login extends javax.swing.JFrame {
     private void SingUp_Check_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SingUp_Check_ButtonActionPerformed
         UserInfoBuilder userInfoBuilder = new UserInfoBuilder();
         UserList ul = new UserList();
-        ul.FRead();
-        ul.Split();
-        ul.BRead();
-        ul.BSplit();
         
         String sid = idTextField.getText();
         String spw = pwPasswordField.getText();
@@ -427,15 +435,27 @@ public class Login extends javax.swing.JFrame {
         check = true;
         black = false;
         try {
+            ul.BRead();
+            ul.BSplit();
             blackinfo = ul.returnBlackinfo();
+            ul.FRead();
+            ul.Split();
             userinfo = ul.returUserinfo();
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        for(int i = 0 ; i < userinfo.size() ; i++){
+        for(int i = 0 ; i <  userinfo.size() ; i++){
             if (userinfo.get(i).getId().equals(idTextField.getText())){
                 JOptionPane.showMessageDialog(null, "중복아이디입니다.");
+                idTextField.setText("");
+                check = false;
+                break;
+            }
+        }
+        for(int i = 0 ; i <  blackinfo.size() ; i++){
+            if (blackinfo.get(i).getId().equals(idTextField.getText())){
+                JOptionPane.showMessageDialog(null, "가입불가 아이디입니다.");
                 idTextField.setText("");
                 check = false;
                 break;
