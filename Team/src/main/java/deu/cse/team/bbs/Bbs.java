@@ -115,16 +115,13 @@ public class Bbs extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Split> list = ListPost();
         JLabel imageLabel;
-        DataCheck dataCheck = new DataCheck();
+        DataCheck check = new DataCheck();
         jTable1.getColumn("썸네일").setCellRenderer(new myTableCellRanderer());
         for(int i=0; i<list.size(); i++) {      
-            if (dataCheck.nameCheck(list.get(i).name))
-                continue;
-            else if (dataCheck.categoryCheck(list.get(i).category))
-                continue;
-            else if (dataCheck.priceCheck(list.get(i).price))
-                continue;
-            else if (dataCheck.locationCheck(list.get(i).location))
+            if (check.dataCheck(nameTextField.getText(), list.get(i).name) ||
+                check.dataCheck(kategorie_product.getSelectedItem().toString(), list.get(i).category) ||
+                check.dataCheck(minPriceTextField.getText(), maxPriceTextField.getText(),list.get(i).price) ||
+                check.dataCheck(locationComboBox.getSelectedItem().toString(), list.get(i).location))
                 continue;
             else {
             imageLabel = new JLabel();
@@ -145,28 +142,25 @@ public class Bbs extends javax.swing.JFrame {
         }
     }
     private class DataCheck {
-        public boolean nameCheck(String Dname) {
-            String Sname = nameTextField.getText();
-            if (Sname.equals("") || Dname.equals(Sname)) {
+        public boolean dataCheck(String Sdata, String Ddata) {
+            if ((Sdata.equals("") || Sdata.equals("--전체--") || Sdata.equals("없음")) || Ddata.equals(Sdata)) {
                 return false;
             } else return true;
         }
-        public boolean categoryCheck(String Dcategory) {
-            String Scategory = kategorie_product.getSelectedItem().toString();
-            if (Scategory.equals("--전체--") || Dcategory.equals(Scategory)) {
-                return false;
-            } else return true;
-        }
-        public boolean priceCheck(String Dprice) {
-            String Smin = minPriceTextField.getText();
-            String Smax = maxPriceTextField.getText();
-            if ((Smin.equals("") && Smax.equals("")) || ((Integer.parseInt(Smin) <= Integer.parseInt(Dprice)) && (Integer.parseInt(Dprice) <= Integer.parseInt(Smax)))) {
-                return false;
-            } else return true;
-        }
-        public boolean locationCheck(String Dlocation) {
-            String Slocation = locationComboBox.getSelectedItem().toString();
-            if (Slocation.equals("없음") || Dlocation.equals(Slocation)) {
+        public boolean dataCheck(String Smin, String Smax, String Ddata) {
+            int min;
+            int max;
+            int data = Integer.parseInt(Ddata);
+            if (Smin.equals("")) {
+                min = 0;
+            } else {
+                min = Integer.parseInt(Smin); }
+            if (Smax.equals("")) {
+                max = 100000000;
+            } else {
+                max = Integer.parseInt(Smax);
+            }
+            if ((min <= data) && (data <= max)) {
                 return false;
             } else return true;
         }
@@ -373,6 +367,18 @@ public class Bbs extends javax.swing.JFrame {
         jLabel10.setText("거래지역 :");
 
         kategorie_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--전체--" }));
+
+        minPriceTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                minPriceTextFieldKeyTyped(evt);
+            }
+        });
+
+        maxPriceTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                maxPriceTextFieldKeyTyped(evt);
+            }
+        });
 
         jLabel11.setText("~");
 
@@ -609,33 +615,23 @@ public class Bbs extends javax.swing.JFrame {
         String category = kategorie_product.getSelectedItem().toString();
         String minPrice = minPriceTextField.getText();
         String maxPrice = maxPriceTextField.getText();
-        String location = locationComboBox.getSelectedItem().toString();
-        String str = name + "\t" + category + "\t" + minPrice + "\t" + maxPrice + "\t" + location;
+        String location = locationComboBox.getSelectedItem().toString();       
         if (!minPrice.equals("") && !maxPrice.equals("")) {
             if (Integer.parseInt(minPrice) > Integer.parseInt(maxPrice)) {
                 JOptionPane.showMessageDialog(null, "최소금액이 최대금액보다 큽니다.");
-            } else {
-                log.setLog(str);
-                savedSearchLog.add(log.saveToMemento());
-                model.insertRow(model.getRowCount(), new Object[]{
-                    name, category, minPrice, maxPrice, location
-                });
-                search.dispose();
-                model = (DefaultTableModel) jTable1.getModel();
-                model.setNumRows(0);
-                addRowToJTable();
             }
-        } else {
-            log.setLog(str);
-            savedSearchLog.add(log.saveToMemento());
-            model.insertRow(model.getRowCount(), new Object[]{
-                name, category, minPrice, maxPrice, location
-            });
-            search.dispose();
-            model = (DefaultTableModel) jTable1.getModel();
-            model.setNumRows(0);
-            addRowToJTable();
         }
+        
+        String str = name + "\t" + category + "\t" + minPrice + "\t" + maxPrice + "\t" + location;
+        log.setLog(str);
+        savedSearchLog.add(log.saveToMemento());
+        model.insertRow(model.getRowCount(), new Object[]{
+            name, category, minPrice, maxPrice, location
+        });
+        search.dispose();
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setNumRows(0);
+        addRowToJTable();        
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -673,6 +669,22 @@ public class Bbs extends javax.swing.JFrame {
         productInfo.dispose();
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void minPriceTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_minPriceTextFieldKeyTyped
+        // 숫자만 입력받는다.
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_minPriceTextFieldKeyTyped
+
+    private void maxPriceTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_maxPriceTextFieldKeyTyped
+        // 숫자만 입력받는다.
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_maxPriceTextFieldKeyTyped
 
     /**
      * @param args the command line arguments
