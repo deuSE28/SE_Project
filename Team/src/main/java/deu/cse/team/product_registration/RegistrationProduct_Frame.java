@@ -90,30 +90,20 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel2.setText("제품명 :");
 
         name_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
-        name_product.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                name_productActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel3.setText("카테고리 :");
 
         category_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         category_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
-        category_product.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                category_productActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel4.setText("판매 가격 :");
 
         price_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
-        price_product.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                price_productActionPerformed(evt);
+        price_product.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                price_productKeyTyped(evt);
             }
         });
 
@@ -124,9 +114,9 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel6.setText("제품 수량 :");
 
         quantity_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
-        quantity_product.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quantity_productActionPerformed(evt);
+        quantity_product.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                quantity_productKeyTyped(evt);
             }
         });
 
@@ -134,22 +124,12 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         jLabel7.setText("제품 설명 :");
 
         explanation_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
-        explanation_product.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                explanation_productActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel8.setText("거래 희망 지역 :");
 
         trandingarea_product.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         trandingarea_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "서울특별시", "부산광역시", "대구광역시", "인천광역시", "광주광역시", "대전광역시", "울산광역시", "세종특별자치시", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도" }));
-        trandingarea_product.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trandingarea_productActionPerformed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("맑은 고딕", 0, 12)); // NOI18N
         jLabel9.setText("제품 상태 :");
@@ -319,10 +299,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void name_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name_productActionPerformed
-
     private void appointment_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointment_buttonActionPerformed
         // TODO add your handling code here:
         String name = name_product.getText();
@@ -364,22 +340,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_appointment_buttonActionPerformed
 
-    private void price_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_price_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_price_productActionPerformed
-
-    private void quantity_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantity_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_quantity_productActionPerformed
-
-    private void explanation_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_explanation_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_explanation_productActionPerformed
-
-    private void trandingarea_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trandingarea_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_trandingarea_productActionPerformed
-
     private void unopened_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unopened_radioActionPerformed
         // TODO add your handling code here:
         unopened_radio.setActionCommand("미개봉");
@@ -401,10 +361,6 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_Back_ButtonActionPerformed
 
-    private void category_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_category_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_category_productActionPerformed
-
     private void almostnew_radioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_almostnew_radioActionPerformed
         // TODO add your handling code here:^
         almostnew_radio.setActionCommand("거의새것");
@@ -414,6 +370,22 @@ public class RegistrationProduct_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         used_radio.setActionCommand("중고");
     }//GEN-LAST:event_used_radioActionPerformed
+
+    private void price_productKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_price_productKeyTyped
+        // 판매가격은 숫자만 입력받고 1억 미만으로만 등록할 수 있다.
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c) || (price_product.getText().length() > 7)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_price_productKeyTyped
+
+    private void quantity_productKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantity_productKeyTyped
+        // 제품수량은 숫자만 입력받는다.
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_quantity_productKeyTyped
         /**
      * @param args the command line arguments
      */
