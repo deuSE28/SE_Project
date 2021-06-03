@@ -126,7 +126,11 @@ public class Category extends javax.swing.JFrame {
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         // TODO add your handling code here:
         int index = CategoryList.getSelectedIndex();
+        try {
         listModel.remove(index);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "삭제할 카테고리를 선택하세요.");
+        }
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
