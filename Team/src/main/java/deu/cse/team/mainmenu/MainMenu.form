@@ -45,13 +45,13 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Component id="RegistrationProduct_Button" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="ProductSearch_Button" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="ProductSearch_Button" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="Delivery_Button" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
+              <EmptySpace pref="54" max="32767" attributes="0"/>
               <Component id="LogOut_button" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -61,7 +61,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="RegistrationProduct_Button">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc81c;&#xd488;&#xb4f1;&#xb85d;"/>
+        <Property name="text" type="java.lang.String" value="&#xc81c;&#xd488; &#xb4f1;&#xb85d;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegistrationProduct_ButtonActionPerformed"/>
@@ -69,7 +69,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="ProductSearch_Button">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc81c;&#xd488;&#xac80;&#xc0c9;"/>
+        <Property name="text" type="java.lang.String" value="&#xc81c;&#xd488; &#xbaa9;&#xb85d;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ProductSearch_ButtonActionPerformed"/>
@@ -77,7 +77,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="Delivery_Button">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xbc30;&#xc1a1;&#xc870;&#xd68c;"/>
+        <Property name="text" type="java.lang.String" value="&#xbc30;&#xc1a1; &#xc870;&#xd68c;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Delivery_ButtonActionPerformed"/>
@@ -93,7 +93,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xacf5;&#xc9c0;&#xc0ac;&#xd56d;"/>
+        <Property name="text" type="java.lang.String" value="&#xacf5;&#xc9c0; &#xc0ac;&#xd56d;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

@@ -41,21 +41,21 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        RegistrationProduct_Button.setText("제품등록");
+        RegistrationProduct_Button.setText("제품 등록");
         RegistrationProduct_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegistrationProduct_ButtonActionPerformed(evt);
             }
         });
 
-        ProductSearch_Button.setText("제품검색");
+        ProductSearch_Button.setText("제품 목록");
         ProductSearch_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProductSearch_ButtonActionPerformed(evt);
             }
         });
 
-        Delivery_Button.setText("배송조회");
+        Delivery_Button.setText("배송 조회");
         Delivery_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Delivery_ButtonActionPerformed(evt);
@@ -69,7 +69,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("공지사항");
+        jButton1.setText("공지 사항");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -98,13 +98,13 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addComponent(RegistrationProduct_Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(ProductSearch_Button)
                 .addGap(18, 18, 18)
                 .addComponent(Delivery_Button)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(LogOut_button)
                 .addContainerGap())
         );
