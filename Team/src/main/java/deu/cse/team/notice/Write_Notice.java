@@ -108,7 +108,6 @@ public class Write_Notice extends javax.swing.JFrame {
        
         try {
             nd.FWrite(WriteNotice_TextArea.getText());
-            System.out.println(WriteNotice_TextArea.getText());
             JOptionPane.showMessageDialog(null, "공지사항이 등록되었습니다.");
         } catch (IOException ex) {
             Logger.getLogger(Write_Notice.class.getName()).log(Level.SEVERE, null, ex);
