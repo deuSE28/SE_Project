@@ -710,6 +710,8 @@ public class Bbs extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "구매 완료되었습니다.");
         productInfo.dispose();
         dispose();
+        MainMenu mm = new MainMenu();
+        mm.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void minPriceTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_minPriceTextFieldKeyTyped
