@@ -10,9 +10,11 @@ import deu.cse.team.mainmenu.MainMenu;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -664,6 +666,47 @@ public class Bbs extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        //구매버튼
+        int row = jTable1.getSelectedRow();
+        TableModel data = jTable1.getModel();
+        String name = (String)data.getValueAt(row, 1);
+        String price = (String)data.getValueAt(row, 2);
+        String location = (String)data.getValueAt(row, 3);
+        String category = (String)data.getValueAt(row, 4);
+        String status = (String)data.getValueAt(row, 6);
+        
+        try {
+            File f1 = new File("C:\\DB\\RegistrationProduct.txt");
+            List<String> nlist = new ArrayList<String>();
+            
+            BufferedReader bufferread = new BufferedReader(new FileReader(f1));
+            String li;
+            
+            while ((li = bufferread.readLine()) != null){
+                String[] str = li.split("\t"); 
+                if(name.equals(str[3])&&price.equals(str[4])&&location.equals(str[8])&&category.equals(str[1])&&status.equals(str[9])){
+                    continue;
+                } else {
+                    nlist.add(li);
+                }
+            }
+            FileWriter writer = new FileWriter(f1);
+            BufferedWriter bw2 = new BufferedWriter(writer);
+           
+            for(int i=0; i<nlist.size(); i++){
+                li = nlist.get(i);
+                bw2.write(li);
+                bw2.write("\n");
+            }
+            bw2.close();
+            bufferread.close();
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("파일이 존재하지않습니다. 경로를 확인해주세요");
+        } catch (IOException e) {
+            System.out.println("오류발생");
+        }
+        
         Delivery_Frame DF = new Delivery_Frame();
         DF.setVisible(true);
         productInfo.dispose();
