@@ -707,8 +707,7 @@ public class Bbs extends javax.swing.JFrame {
             System.out.println("오류발생");
         }
         
-        Delivery_Frame DF = new Delivery_Frame();
-        DF.setVisible(true);
+        JOptionPane.showMessageDialog(null, "구매 완료되었습니다.");
         productInfo.dispose();
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
