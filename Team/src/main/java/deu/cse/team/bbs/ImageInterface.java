@@ -11,6 +11,6 @@ import javax.swing.ImageIcon;
  *
  * @author 916
  */
-public interface Image {
+public interface ImageInterface {
     ImageIcon displayImage();
 }

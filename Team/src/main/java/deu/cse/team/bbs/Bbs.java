@@ -127,7 +127,7 @@ public class Bbs extends javax.swing.JFrame {
                 continue;
             else {
             imageLabel = new JLabel();
-            Proxy_Image setThumbnail = new Proxy_Image(new ImageIcon(setIconImage(list.get(i).image, 100, 100)));
+            Proxy_Image setThumbnail = new Proxy_Image(list.get(i).image, 100, 100);
             imageLabel.setIcon(setThumbnail.displayImage());
             model.insertRow(model.getRowCount(), new Object[]{
             imageLabel,
