@@ -31,7 +31,7 @@ public class Category extends javax.swing.JFrame {
         listModel = new DefaultListModel<>();
         flag = true;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,12 +122,14 @@ public class Category extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public boolean isModified = false;
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         // TODO add your handling code here:
         int index = CategoryList.getSelectedIndex();
         try {
         listModel.remove(index);
+        isModified = true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "삭제할 카테고리를 선택하세요.");
         }
@@ -140,6 +142,7 @@ public class Category extends javax.swing.JFrame {
             listModel.addElement(str);
             CategoryList.setModel(listModel);
             AddTextField.setText("");
+            isModified = true;
         } else {
             JOptionPane.showMessageDialog(null, "추가할 카테고리를 입력하세요.");
         }
@@ -149,17 +152,22 @@ public class Category extends javax.swing.JFrame {
         // TODO add your handling code here:
         int val = CategoryList.getModel().getSize();
         PrintWriter writer = null;
-        try {
-            writer = new PrintWriter("C:\\DB\\category.txt");
-            writer.println(val);
-            for (int i=0; i<val; i++) {
-                writer.println(CategoryList.getModel().getElementAt(i));
+        if (isModified == true) {
+            try {
+                writer = new PrintWriter("C:\\DB\\category.txt");
+                writer.println(val);
+                for (int i=0; i<val; i++) {
+                    writer.println(CategoryList.getModel().getElementAt(i));
+                }
+                isModified = false;
+                JOptionPane.showMessageDialog(null, "저장완료");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                writer.close();
             }
-            JOptionPane.showMessageDialog(null, "저장완료");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            writer.close();
+        } else {
+            JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");
         }
     }//GEN-LAST:event_SaveButtonActionPerformed
 
